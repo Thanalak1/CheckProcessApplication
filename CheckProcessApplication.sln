@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckProcessApplication", "CheckProcessApplication\CheckProcessApplication.csproj", "{A66A0E7F-C04E-4684-888B-B95377199B67}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "CheckProcessApp", "CheckProcessApp\CheckProcessApp.vdproj", "{C06F08F0-BABB-4892-A957-82A2C9D2322D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A66A0E7F-C04E-4684-888B-B95377199B67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A66A0E7F-C04E-4684-888B-B95377199B67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A66A0E7F-C04E-4684-888B-B95377199B67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A66A0E7F-C04E-4684-888B-B95377199B67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C06F08F0-BABB-4892-A957-82A2C9D2322D}.Debug|Any CPU.ActiveCfg = Debug
+		{C06F08F0-BABB-4892-A957-82A2C9D2322D}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {595B9D05-64E1-44A7-8999-9A5F58A77412}
+	EndGlobalSection
+EndGlobal
