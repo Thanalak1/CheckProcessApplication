@@ -56,8 +56,6 @@
             this.LinePanel = new System.Windows.Forms.Panel();
             this.LogoPictureBox = new System.Windows.Forms.PictureBox();
             this.ProgramPanel = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
             this.MenuPanel.SuspendLayout();
             this.BathePanelSub.SuspendLayout();
             this.BuryPanelSub.SuspendLayout();
@@ -65,13 +63,11 @@
             this.DressPanelSub.SuspendLayout();
             this.FoundryPanelSub.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LogoPictureBox)).BeginInit();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // MenuPanel
             // 
             this.MenuPanel.BackColor = System.Drawing.Color.LavenderBlush;
-            this.MenuPanel.Controls.Add(this.panel1);
             this.MenuPanel.Controls.Add(this.LeeBtn);
             this.MenuPanel.Controls.Add(this.CompleteMain);
             this.MenuPanel.Controls.Add(this.BathePanelSub);
@@ -90,7 +86,7 @@
             this.MenuPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.MenuPanel.Location = new System.Drawing.Point(0, 0);
             this.MenuPanel.Name = "MenuPanel";
-            this.MenuPanel.Size = new System.Drawing.Size(173, 569);
+            this.MenuPanel.Size = new System.Drawing.Size(173, 511);
             this.MenuPanel.TabIndex = 0;
             // 
             // LeeBtn
@@ -98,12 +94,12 @@
             this.LeeBtn.BackColor = System.Drawing.Color.RoyalBlue;
             this.LeeBtn.BorderRadius = 0;
             this.LeeBtn.BorderSize = 0;
-            this.LeeBtn.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.LeeBtn.Dock = System.Windows.Forms.DockStyle.Top;
             this.LeeBtn.FlatAppearance.BorderSize = 0;
             this.LeeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.LeeBtn.Font = new System.Drawing.Font("Angsana New", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.LeeBtn.ForeColor = System.Drawing.Color.White;
-            this.LeeBtn.Location = new System.Drawing.Point(0, 503);
+            this.LeeBtn.Location = new System.Drawing.Point(0, 607);
             this.LeeBtn.Name = "LeeBtn";
             this.LeeBtn.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.LeeBtn.Size = new System.Drawing.Size(173, 33);
@@ -486,7 +482,7 @@
             this.CloseBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CloseBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.CloseBtn.ForeColor = System.Drawing.Color.White;
-            this.CloseBtn.Location = new System.Drawing.Point(0, 536);
+            this.CloseBtn.Location = new System.Drawing.Point(0, 478);
             this.CloseBtn.Name = "CloseBtn";
             this.CloseBtn.Size = new System.Drawing.Size(173, 33);
             this.CloseBtn.TabIndex = 2;
@@ -521,32 +517,12 @@
             this.ProgramPanel.Size = new System.Drawing.Size(392, 408);
             this.ProgramPanel.TabIndex = 1;
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 607);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(173, 74);
-            this.panel1.TabIndex = 15;
-            // 
-            // button1
-            // 
-            this.button1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button1.Location = new System.Drawing.Point(0, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(173, 33);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Snow;
-            this.ClientSize = new System.Drawing.Size(584, 569);
+            this.ClientSize = new System.Drawing.Size(584, 511);
             this.Controls.Add(this.ProgramPanel);
             this.Controls.Add(this.MenuPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -559,7 +535,6 @@
             this.DressPanelSub.ResumeLayout(false);
             this.FoundryPanelSub.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.LogoPictureBox)).EndInit();
-            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -593,7 +568,5 @@
         private System.Windows.Forms.Panel BathePanelSub;
         private CustomTools.BtnCustom BatheAndPolishBtn;
         private System.Windows.Forms.Panel ProgramPanel;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button1;
     }
 }
