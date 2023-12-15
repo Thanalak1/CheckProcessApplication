@@ -127,5 +127,15 @@ namespace CheckProcessApplication
             openChildForms(new BatheAndPolish());
             hideSubMenu();
         }
+
+        private void LeeBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

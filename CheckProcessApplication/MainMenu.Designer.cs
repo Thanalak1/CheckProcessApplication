@@ -30,32 +30,34 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMenu));
             this.MenuPanel = new System.Windows.Forms.Panel();
-            this.BathePanelSub = new System.Windows.Forms.Panel();
-            this.BuryPanelSub = new System.Windows.Forms.Panel();
-            this.PolishPanelSub = new System.Windows.Forms.Panel();
-            this.DressPanelSub = new System.Windows.Forms.Panel();
-            this.FoundryPanelSub = new System.Windows.Forms.Panel();
-            this.LinePanel = new System.Windows.Forms.Panel();
-            this.ProgramPanel = new System.Windows.Forms.Panel();
             this.LeeBtn = new CheckProcessApplication.CustomTools.BtnCustom();
             this.CompleteMain = new CheckProcessApplication.CustomTools.BtnCustom();
+            this.BathePanelSub = new System.Windows.Forms.Panel();
             this.BatheAndPolishBtn = new CheckProcessApplication.CustomTools.BtnCustom();
             this.BatheBtn = new CheckProcessApplication.CustomTools.BtnCustom();
             this.BatheMain = new CheckProcessApplication.CustomTools.BtnCustom();
+            this.BuryPanelSub = new System.Windows.Forms.Panel();
             this.BuryAndColorBtn = new CheckProcessApplication.CustomTools.BtnCustom();
             this.BuryBtn = new CheckProcessApplication.CustomTools.BtnCustom();
             this.BuryMain = new CheckProcessApplication.CustomTools.BtnCustom();
+            this.PolishPanelSub = new System.Windows.Forms.Panel();
             this.PolishAndBuryBtn = new CheckProcessApplication.CustomTools.BtnCustom();
             this.PolishBtn = new CheckProcessApplication.CustomTools.BtnCustom();
             this.PolishMain = new CheckProcessApplication.CustomTools.BtnCustom();
+            this.DressPanelSub = new System.Windows.Forms.Panel();
             this.DressAndPolishBtn = new CheckProcessApplication.CustomTools.BtnCustom();
             this.DressBtn = new CheckProcessApplication.CustomTools.BtnCustom();
             this.DressMain = new CheckProcessApplication.CustomTools.BtnCustom();
+            this.FoundryPanelSub = new System.Windows.Forms.Panel();
             this.FoundryAndDressBtn = new CheckProcessApplication.CustomTools.BtnCustom();
             this.FoundryBtn = new CheckProcessApplication.CustomTools.BtnCustom();
             this.FoundryMain = new CheckProcessApplication.CustomTools.BtnCustom();
             this.CloseBtn = new CheckProcessApplication.CustomTools.BtnCustom();
+            this.LinePanel = new System.Windows.Forms.Panel();
             this.LogoPictureBox = new System.Windows.Forms.PictureBox();
+            this.ProgramPanel = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.MenuPanel.SuspendLayout();
             this.BathePanelSub.SuspendLayout();
             this.BuryPanelSub.SuspendLayout();
@@ -63,11 +65,13 @@
             this.DressPanelSub.SuspendLayout();
             this.FoundryPanelSub.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LogoPictureBox)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // MenuPanel
             // 
             this.MenuPanel.BackColor = System.Drawing.Color.LavenderBlush;
+            this.MenuPanel.Controls.Add(this.panel1);
             this.MenuPanel.Controls.Add(this.LeeBtn);
             this.MenuPanel.Controls.Add(this.CompleteMain);
             this.MenuPanel.Controls.Add(this.BathePanelSub);
@@ -89,83 +93,17 @@
             this.MenuPanel.Size = new System.Drawing.Size(173, 569);
             this.MenuPanel.TabIndex = 0;
             // 
-            // BathePanelSub
-            // 
-            this.BathePanelSub.Controls.Add(this.BatheAndPolishBtn);
-            this.BathePanelSub.Controls.Add(this.BatheBtn);
-            this.BathePanelSub.Dock = System.Windows.Forms.DockStyle.Top;
-            this.BathePanelSub.Location = new System.Drawing.Point(0, 514);
-            this.BathePanelSub.Name = "BathePanelSub";
-            this.BathePanelSub.Size = new System.Drawing.Size(173, 60);
-            this.BathePanelSub.TabIndex = 12;
-            // 
-            // BuryPanelSub
-            // 
-            this.BuryPanelSub.Controls.Add(this.BuryAndColorBtn);
-            this.BuryPanelSub.Controls.Add(this.BuryBtn);
-            this.BuryPanelSub.Dock = System.Windows.Forms.DockStyle.Top;
-            this.BuryPanelSub.Location = new System.Drawing.Point(0, 421);
-            this.BuryPanelSub.Name = "BuryPanelSub";
-            this.BuryPanelSub.Size = new System.Drawing.Size(173, 60);
-            this.BuryPanelSub.TabIndex = 10;
-            // 
-            // PolishPanelSub
-            // 
-            this.PolishPanelSub.Controls.Add(this.PolishAndBuryBtn);
-            this.PolishPanelSub.Controls.Add(this.PolishBtn);
-            this.PolishPanelSub.Dock = System.Windows.Forms.DockStyle.Top;
-            this.PolishPanelSub.Location = new System.Drawing.Point(0, 332);
-            this.PolishPanelSub.Name = "PolishPanelSub";
-            this.PolishPanelSub.Size = new System.Drawing.Size(173, 56);
-            this.PolishPanelSub.TabIndex = 8;
-            // 
-            // DressPanelSub
-            // 
-            this.DressPanelSub.Controls.Add(this.DressAndPolishBtn);
-            this.DressPanelSub.Controls.Add(this.DressBtn);
-            this.DressPanelSub.Dock = System.Windows.Forms.DockStyle.Top;
-            this.DressPanelSub.Location = new System.Drawing.Point(0, 243);
-            this.DressPanelSub.Name = "DressPanelSub";
-            this.DressPanelSub.Size = new System.Drawing.Size(173, 56);
-            this.DressPanelSub.TabIndex = 6;
-            // 
-            // FoundryPanelSub
-            // 
-            this.FoundryPanelSub.Controls.Add(this.FoundryAndDressBtn);
-            this.FoundryPanelSub.Controls.Add(this.FoundryBtn);
-            this.FoundryPanelSub.Dock = System.Windows.Forms.DockStyle.Top;
-            this.FoundryPanelSub.Location = new System.Drawing.Point(0, 150);
-            this.FoundryPanelSub.Name = "FoundryPanelSub";
-            this.FoundryPanelSub.Size = new System.Drawing.Size(173, 63);
-            this.FoundryPanelSub.TabIndex = 4;
-            // 
-            // LinePanel
-            // 
-            this.LinePanel.BackColor = System.Drawing.Color.LightPink;
-            this.LinePanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.LinePanel.Location = new System.Drawing.Point(0, 110);
-            this.LinePanel.Name = "LinePanel";
-            this.LinePanel.Size = new System.Drawing.Size(173, 10);
-            this.LinePanel.TabIndex = 1;
-            // 
-            // ProgramPanel
-            // 
-            this.ProgramPanel.Location = new System.Drawing.Point(180, 13);
-            this.ProgramPanel.Name = "ProgramPanel";
-            this.ProgramPanel.Size = new System.Drawing.Size(392, 408);
-            this.ProgramPanel.TabIndex = 1;
-            // 
             // LeeBtn
             // 
             this.LeeBtn.BackColor = System.Drawing.Color.RoyalBlue;
             this.LeeBtn.BorderRadius = 0;
             this.LeeBtn.BorderSize = 0;
-            this.LeeBtn.Dock = System.Windows.Forms.DockStyle.Top;
+            this.LeeBtn.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.LeeBtn.FlatAppearance.BorderSize = 0;
             this.LeeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.LeeBtn.Font = new System.Drawing.Font("Angsana New", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.LeeBtn.ForeColor = System.Drawing.Color.White;
-            this.LeeBtn.Location = new System.Drawing.Point(0, 607);
+            this.LeeBtn.Location = new System.Drawing.Point(0, 503);
             this.LeeBtn.Name = "LeeBtn";
             this.LeeBtn.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.LeeBtn.Size = new System.Drawing.Size(173, 33);
@@ -173,6 +111,7 @@
             this.LeeBtn.Text = "ตรวจงานขึ้นแบบใหม่";
             this.LeeBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.LeeBtn.UseVisualStyleBackColor = false;
+            this.LeeBtn.Click += new System.EventHandler(this.LeeBtn_Click);
             // 
             // CompleteMain
             // 
@@ -192,6 +131,16 @@
             this.CompleteMain.Text = "ตรวจงานตัวเรือนสำเร็จ";
             this.CompleteMain.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.CompleteMain.UseVisualStyleBackColor = false;
+            // 
+            // BathePanelSub
+            // 
+            this.BathePanelSub.Controls.Add(this.BatheAndPolishBtn);
+            this.BathePanelSub.Controls.Add(this.BatheBtn);
+            this.BathePanelSub.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BathePanelSub.Location = new System.Drawing.Point(0, 514);
+            this.BathePanelSub.Name = "BathePanelSub";
+            this.BathePanelSub.Size = new System.Drawing.Size(173, 60);
+            this.BathePanelSub.TabIndex = 12;
             // 
             // BatheAndPolishBtn
             // 
@@ -253,6 +202,16 @@
             this.BatheMain.UseVisualStyleBackColor = false;
             this.BatheMain.Click += new System.EventHandler(this.BatheMain_Click);
             // 
+            // BuryPanelSub
+            // 
+            this.BuryPanelSub.Controls.Add(this.BuryAndColorBtn);
+            this.BuryPanelSub.Controls.Add(this.BuryBtn);
+            this.BuryPanelSub.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BuryPanelSub.Location = new System.Drawing.Point(0, 421);
+            this.BuryPanelSub.Name = "BuryPanelSub";
+            this.BuryPanelSub.Size = new System.Drawing.Size(173, 60);
+            this.BuryPanelSub.TabIndex = 10;
+            // 
             // BuryAndColorBtn
             // 
             this.BuryAndColorBtn.BackColor = System.Drawing.Color.AliceBlue;
@@ -312,6 +271,16 @@
             this.BuryMain.UseVisualStyleBackColor = false;
             this.BuryMain.Click += new System.EventHandler(this.BuryMain_Click);
             // 
+            // PolishPanelSub
+            // 
+            this.PolishPanelSub.Controls.Add(this.PolishAndBuryBtn);
+            this.PolishPanelSub.Controls.Add(this.PolishBtn);
+            this.PolishPanelSub.Dock = System.Windows.Forms.DockStyle.Top;
+            this.PolishPanelSub.Location = new System.Drawing.Point(0, 332);
+            this.PolishPanelSub.Name = "PolishPanelSub";
+            this.PolishPanelSub.Size = new System.Drawing.Size(173, 56);
+            this.PolishPanelSub.TabIndex = 8;
+            // 
             // PolishAndBuryBtn
             // 
             this.PolishAndBuryBtn.BackColor = System.Drawing.Color.AliceBlue;
@@ -369,6 +338,16 @@
             this.PolishMain.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.PolishMain.UseVisualStyleBackColor = false;
             this.PolishMain.Click += new System.EventHandler(this.PolishMain_Click);
+            // 
+            // DressPanelSub
+            // 
+            this.DressPanelSub.Controls.Add(this.DressAndPolishBtn);
+            this.DressPanelSub.Controls.Add(this.DressBtn);
+            this.DressPanelSub.Dock = System.Windows.Forms.DockStyle.Top;
+            this.DressPanelSub.Location = new System.Drawing.Point(0, 243);
+            this.DressPanelSub.Name = "DressPanelSub";
+            this.DressPanelSub.Size = new System.Drawing.Size(173, 56);
+            this.DressPanelSub.TabIndex = 6;
             // 
             // DressAndPolishBtn
             // 
@@ -428,6 +407,16 @@
             this.DressMain.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.DressMain.UseVisualStyleBackColor = false;
             this.DressMain.Click += new System.EventHandler(this.DressMain_Click);
+            // 
+            // FoundryPanelSub
+            // 
+            this.FoundryPanelSub.Controls.Add(this.FoundryAndDressBtn);
+            this.FoundryPanelSub.Controls.Add(this.FoundryBtn);
+            this.FoundryPanelSub.Dock = System.Windows.Forms.DockStyle.Top;
+            this.FoundryPanelSub.Location = new System.Drawing.Point(0, 150);
+            this.FoundryPanelSub.Name = "FoundryPanelSub";
+            this.FoundryPanelSub.Size = new System.Drawing.Size(173, 63);
+            this.FoundryPanelSub.TabIndex = 4;
             // 
             // FoundryAndDressBtn
             // 
@@ -505,6 +494,15 @@
             this.CloseBtn.UseVisualStyleBackColor = false;
             this.CloseBtn.Click += new System.EventHandler(this.CloseBtn_Click);
             // 
+            // LinePanel
+            // 
+            this.LinePanel.BackColor = System.Drawing.Color.LightPink;
+            this.LinePanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.LinePanel.Location = new System.Drawing.Point(0, 110);
+            this.LinePanel.Name = "LinePanel";
+            this.LinePanel.Size = new System.Drawing.Size(173, 10);
+            this.LinePanel.TabIndex = 1;
+            // 
             // LogoPictureBox
             // 
             this.LogoPictureBox.Dock = System.Windows.Forms.DockStyle.Top;
@@ -515,6 +513,33 @@
             this.LogoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.LogoPictureBox.TabIndex = 0;
             this.LogoPictureBox.TabStop = false;
+            // 
+            // ProgramPanel
+            // 
+            this.ProgramPanel.Location = new System.Drawing.Point(180, 13);
+            this.ProgramPanel.Name = "ProgramPanel";
+            this.ProgramPanel.Size = new System.Drawing.Size(392, 408);
+            this.ProgramPanel.TabIndex = 1;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.button1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 607);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(173, 74);
+            this.panel1.TabIndex = 15;
+            // 
+            // button1
+            // 
+            this.button1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button1.Location = new System.Drawing.Point(0, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(173, 33);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // MainMenu
             // 
@@ -534,6 +559,7 @@
             this.DressPanelSub.ResumeLayout(false);
             this.FoundryPanelSub.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.LogoPictureBox)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -567,5 +593,7 @@
         private System.Windows.Forms.Panel BathePanelSub;
         private CustomTools.BtnCustom BatheAndPolishBtn;
         private System.Windows.Forms.Panel ProgramPanel;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button button1;
     }
 }
