@@ -16,5 +16,10 @@ namespace CheckProcessApplication
         {
             InitializeComponent();
         }
+
+        private void CloseBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
