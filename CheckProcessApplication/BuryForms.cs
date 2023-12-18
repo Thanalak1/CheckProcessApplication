@@ -28,7 +28,7 @@ namespace CheckProcessApplication
         private void previewBtn_Click(object sender, EventArgs e)
         {
             String inv = InvInput.Texts;
-            String sqlQuery = "select Inv_No, DocNo, EmpCode, EmpName, jobbarcode, Diff1_1, Diff1_2, ChkAccount, ChkAccountNot, ChkReturn, Check_BRASS, Diff2, A2, P2, Diff3, WD, W1, W2, DamagePrice, OKPrice, EmpAmount, Diff6 from V_InlaidReport_Testing where Inv_No = '" + inv + "' order by DocNo asc;";
+            String sqlQuery = "select * from V_InlaidReport_Testing where Inv_No = '" + inv + "' order by DocNo asc;";
 
             PreviewBuryReports previewBury = new PreviewBuryReports();
             BuryReports reports = new BuryReports();
