@@ -24,6 +24,7 @@ namespace CheckProcessApplication
             BuryPanelSub.Visible = false;
             BathePanelSub.Visible=false;
             PolishPanelSub.Visible = false;
+            panelComplete.Visible = false;
         }
 
         private void hideSubMenu() {
@@ -41,6 +42,9 @@ namespace CheckProcessApplication
             }
             if (PolishPanelSub.Visible = true) {
                 PolishPanelSub.Visible = false;
+            }
+            if (panelComplete.Visible = true) { 
+                panelComplete.Visible = false;
             }
         }
 
@@ -136,6 +140,17 @@ namespace CheckProcessApplication
         private void button1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void CompleteMain_Click(object sender, EventArgs e)
+        {
+            showSubMenu(panelComplete);
+        }
+
+        private void completeNecklaceBtn_Click(object sender, EventArgs e)
+        {
+            openChildForms(new completeForm());
+            hideSubMenu();
         }
     }
 }

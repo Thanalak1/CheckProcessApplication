@@ -155,6 +155,11 @@
     <Compile Include="completeForm.Designer.cs">
       <DependentUpon>completeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CompleteReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CompleteReport.rpt</DependentUpon>
+    </Compile>
     <Compile Include="CustomTools\BtnCustom.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -239,6 +244,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="completeForm.resx">
       <DependentUpon>completeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CompleteReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CompleteReport.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomTools\TextBoxCustom.resx">
       <DependentUpon>TextBoxCustom.cs</DependentUpon>
