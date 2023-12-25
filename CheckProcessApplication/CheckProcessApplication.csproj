@@ -159,6 +159,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CompleteReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="CustomTools\BtnCustom.cs">
       <SubType>Component</SubType>
@@ -210,6 +211,12 @@
     </Compile>
     <Compile Include="PreviewBuryReports.Designer.cs">
       <DependentUpon>PreviewBuryReports.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PreviewComplete.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PreviewComplete.Designer.cs">
+      <DependentUpon>PreviewComplete.cs</DependentUpon>
     </Compile>
     <Compile Include="PreviewDress.cs">
       <SubType>Form</SubType>
@@ -274,6 +281,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PreviewBuryReports.resx">
       <DependentUpon>PreviewBuryReports.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PreviewComplete.resx">
+      <DependentUpon>PreviewComplete.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PreviewDress.resx">
       <DependentUpon>PreviewDress.cs</DependentUpon>
