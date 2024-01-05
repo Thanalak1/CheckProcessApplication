@@ -35,7 +35,7 @@ namespace CheckProcessApplication
             SqlCommand comm = new SqlCommand(sqlQuery, conn);
             SqlDataAdapter adap = new SqlDataAdapter(comm);
             DataSet ds = new DataSet();
-            adap.SelectCommand.CommandTimeout = 480;
+            adap.SelectCommand.CommandTimeout = 720;
             adap.Fill(ds, "V_Complete");
             reports.SetDataSource(ds);
 
