@@ -12,9 +12,9 @@ namespace CheckProcessApplication
     {
         private string connectingString;
 
-        public DatabaseConnections(string connectionString)
+        public DatabaseConnections()
         {
-            this.connectingString = connectionString;
+            this.connectingString = "Data Source=server;Initial Catalog=PrincessData;Persist Security Info=True;User ID=admin; Password=jp";
         }
 
         private SqlConnection GetConnection()

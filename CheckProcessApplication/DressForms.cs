@@ -49,31 +49,48 @@ namespace CheckProcessApplication
             //previewDress.Show();
             //conn.Close();
 
+            //string sqlQuery = "select * from V_DressV2 where Inv_No = @Inv order by DocNo asc;";
+            //DataTable dt;
+
+            //DatabaseConnections db = new DatabaseConnections();
+            //SqlParameter[] parameters = { 
+            //    new SqlParameter("@Inv", InvInput.Texts)
+            //};
+
+            //dt = db.ExecuteQuery(sqlQuery, parameters);
+
+            //foreach (DataRow row in dt.Rows)
+            //{
+            //    foreach (DataColumn column in dt.Columns)
+            //    {
+            //        Console.WriteLine(column.ColumnName);
+            //    }
+            //}
+
+            //PreviewDressSecondForm form = new PreviewDressSecondForm();
+            //DressReport2 report = new DressReport2();
+
+            //report.SetDataSource(dt);
+            //form.crystalReportViewer1.ReportSource = report;
+            //form.crystalReportViewer1.Refresh();
+            //form.Show();
+
             string sqlQuery = "select * from V_DressV2 where Inv_No = @Inv order by DocNo asc;";
             DataTable dt;
 
-            DatabaseConnections db = new DatabaseConnections(connectionPrincess);
-            SqlParameter[] parameters = { 
+            DatabaseConnections db = new DatabaseConnections();
+            SqlParameter[] parameters = {
                 new SqlParameter("@Inv", InvInput.Texts)
             };
 
             dt = db.ExecuteQuery(sqlQuery, parameters);
 
-            foreach (DataRow row in dt.Rows)
-            {
-                foreach (DataColumn column in dt.Columns)
-                {
-                    Console.WriteLine(column.ColumnName);
-                }
-            }
+            string Path = "D:\\Best_Project\\CheckProcessProject\\CheckProcessApplication\\CheckProcessApplication\\";
+            string fileName = "DressReport2.rpt";
+            string fullPath = Path + fileName;
 
-            PreviewDressSecondForm form = new PreviewDressSecondForm();
-            DressReport2 report = new DressReport2();
-
-            report.SetDataSource(dt);
-            form.crystalReportViewer1.ReportSource = report;
-            form.crystalReportViewer1.Refresh();
-            form.Show();
+            ReportGenerator report = new ReportGenerator();
+            report.ShowReport(fullPath, dt);
         }
     }
 }
