@@ -303,6 +303,7 @@
             this.PolishAndBuryBtn.Text = "ตรวจงานขัด+ฝัง";
             this.PolishAndBuryBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.PolishAndBuryBtn.UseVisualStyleBackColor = false;
+            this.PolishAndBuryBtn.Click += new System.EventHandler(this.PolishAndBuryBtn_Click);
             // 
             // PolishBtn
             // 
@@ -322,6 +323,7 @@
             this.PolishBtn.Text = "ตรวจงานขัด";
             this.PolishBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.PolishBtn.UseVisualStyleBackColor = false;
+            this.PolishBtn.Click += new System.EventHandler(this.PolishBtn_Click);
             // 
             // PolishMain
             // 
@@ -371,6 +373,7 @@
             this.DressAndPolishBtn.Text = "ตรวจงานแต่ง+ขัด";
             this.DressAndPolishBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.DressAndPolishBtn.UseVisualStyleBackColor = false;
+            this.DressAndPolishBtn.Click += new System.EventHandler(this.DressAndPolishBtn_Click);
             // 
             // DressBtn
             // 
@@ -440,6 +443,7 @@
             this.FoundryAndDressBtn.Text = "ตรวจงานหล่อ+แต่ง";
             this.FoundryAndDressBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.FoundryAndDressBtn.UseVisualStyleBackColor = false;
+            this.FoundryAndDressBtn.Click += new System.EventHandler(this.FoundryAndDressBtn_Click);
             // 
             // FoundryBtn
             // 
@@ -459,6 +463,7 @@
             this.FoundryBtn.Text = "ตรวจงานหล่อ";
             this.FoundryBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.FoundryBtn.UseVisualStyleBackColor = false;
+            this.FoundryBtn.Click += new System.EventHandler(this.FoundryBtn_Click);
             // 
             // FoundryMain
             // 

@@ -28,22 +28,22 @@ namespace CheckProcessApplication
         }
 
         private void hideSubMenu() {
-            if (FoundryPanelSub.Visible = true) {
+            if (FoundryPanelSub.Visible) {
                 FoundryPanelSub.Visible = false;
             }
-            if (DressPanelSub.Visible = true) {
+            if (DressPanelSub.Visible) {
                 DressPanelSub.Visible = false;
             }
-            if (BuryPanelSub.Visible = true) {
+            if (BuryPanelSub.Visible) {
                 BuryPanelSub.Visible = false;
             }
-            if (BathePanelSub.Visible = true) {
+            if (BathePanelSub.Visible) {
                 BathePanelSub.Visible = false;
             }
-            if (PolishPanelSub.Visible = true) {
+            if (PolishPanelSub.Visible) {
                 PolishPanelSub.Visible = false;
             }
-            if (panelComplete.Visible = true) { 
+            if (panelComplete.Visible) { 
                 panelComplete.Visible = false;
             }
         }
@@ -151,6 +151,32 @@ namespace CheckProcessApplication
         {
             openChildForms(new completeForm());
             hideSubMenu();
+        }
+
+        private void FoundryBtn_Click(object sender, EventArgs e)
+        {
+            openChildForms(new Foundry());
+            hideSubMenu();
+        }
+
+        private void FoundryAndDressBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DressAndPolishBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PolishBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PolishAndBuryBtn_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
