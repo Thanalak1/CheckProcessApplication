@@ -81,7 +81,7 @@ namespace CheckProcessApplication
             if (!ds.Tables.Contains(dt.TableName))
                 ds.Tables.Add(dt.Copy());
 
-            cReport.Load(@"C:\Users\admin\source\repos\CheckProcessApplication\CheckProcessApplication\Reports\PolishCrystalReport.rpt");
+            cReport.Load($"{Application.StartupPath}/Reports/PolishCrystalReport.rpt");
             ds.WriteXmlSchema(xsdFile);
             cReport.SetDataSource(dt);
             var u = new uReportViewer(cReport);
