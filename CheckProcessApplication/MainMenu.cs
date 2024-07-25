@@ -171,7 +171,8 @@ namespace CheckProcessApplication
 
         private void PolishBtn_Click(object sender, EventArgs e)
         {
-
+            openChildForms(new Polish());
+            hideSubMenu();
         }
 
         private void PolishAndBuryBtn_Click(object sender, EventArgs e)
