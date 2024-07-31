@@ -241,6 +241,12 @@
     <Compile Include="MainMenu.Designer.cs">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Polish.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Polish.Designer.cs">
+      <DependentUpon>Polish.cs</DependentUpon>
+    </Compile>
     <Compile Include="PolishAndBathReports.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -350,6 +356,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Polish.resx">
+      <DependentUpon>Polish.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PolishAndBathReports.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
