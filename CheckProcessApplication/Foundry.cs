@@ -59,7 +59,7 @@ namespace CheckProcessApplication
                 $", CASE WHEN JobHead.ChkReturn = 0 AND JobHead.ChkAccount = 1 THEN ISNULL(AccEmp2.OKWG, 0) + ISNULL(JobBills.RtWg, 0) + ISNULL(V_JobMaterial_Sum.MatRecWg, 0) + ((ISNULL(AccEmp2.OKWG, 0) - ISNULL(V_JobMaterial_Sum.MatWg, 0) + ISNULL(V_JobMaterial_Sum.MatWg2, 0)) / 100) - ISNULL(AccEmp.ISSWG, 0) ELSE 0 END AS DIFFTotalWG" +
                 $", CASE WHEN JobHead.ChkReturn = 0 AND JobHead.ChkAccount = 1 THEN ((ISNULL(AccEmp2.OKWG, 0) + ISNULL(JobBills.RtWg, 0) + ISNULL(V_JobMaterial_Sum.MatRecWg, 0) + ((ISNULL(AccEmp2.OKWG, 0) - ISNULL(V_JobMaterial_Sum.MatWg, 0) + ISNULL(V_JobMaterial_Sum.MatWg2, 0)) / 100) - ISNULL(AccEmp.ISSWG, 0)) / ISNULL(AccEmp.ISSWG, 0)) * 100 ELSE 0 END AS DIFFTotalWGPercent" +
                 $", (JobDetail.PriceJob * FLOOR(AccEmp2.OKQty)) - AccEmp.DMWG + AccEmp.LSWG + AccEmp.DMGemAmount + AccEmp.LSGemAmount + AccEmp.DeductAmount AS TotalWage" +
-                $", JobDeductFormula.Deduct * JobDeductFormula.Price AS TEST" +
+                $", CASE WHEN JobDeducts.Amounts IS NULL THEN 0 ELSE (JobDeductFormula.Deduct * JobDeductFormula.Price) - JobDeducts.Amounts END AS TEST" +
                 $" FROM (SELECT * FROM AccEmp {WHERE}) AS AccEmp" +
                 $" LEFT JOIN AccEmp2 ON AccEmp.DocNo = AccEmp2.DocNo AND AccEmp.EmpCode = AccEmp2.EmpCode" +
                 $" LEFT JOIN JobHead ON AccEmp.DocNo = JobHead.DocNo AND AccEmp.EmpCode = JobHead.EmpCode" +
@@ -74,6 +74,7 @@ namespace CheckProcessApplication
                 $" LEFT JOIN PSKTran2 ON JobDetail.OrderNo = PSKTran2.Orderno AND JobDetail.LotNo = PSKTran2.LotNo AND JobDetail.Barcode = PSKTran2.Barcode" +
                 $" LEFT JOIN (SELECT DocNo, EmpCode, SUM(ISNULL(OKQty,0) * ISNULL(AccPrice, 0)) AS PriceJob, SUM(ISNULL(qty, 0)) AS qtys FROM AccEmp2 INNER JOIN Jobmodel_purchase ON AccEmp2.JobBarCode = Jobmodel_purchase.Jobbarcode GROUP BY DocNo, EmpCode) AS Emps ON AccEmp.DocNo = Emps.DocNo AND AccEmp.EmpCode = Emps.EmpCode" +
                 $" LEFT JOIN JobDeductFormula ON JobHead.JobType = JobDeductFormula.JobType AND (JobDetail.TtQty BETWEEN JobDeductFormula.StartQty AND JobDeductFormula.EndQty)" +
+                $" LEFT JOIN (SELECT Docno, EmpCode, Jobbarcode, SUM(Amount) AS Amounts FROM JobDeduct GROUP BY Docno, EmpCode, Jobbarcode) AS JobDeducts ON AccEmp.DocNo = JobDeducts.Docno AND AccEmp.EmpCode = JobDeducts.EmpCode AND AccEmp2.JobBarCode = JobDeducts.Jobbarcode" +
                 $") AS s" +
                 $" ORDER BY DocNo, JobBarCode";
 
