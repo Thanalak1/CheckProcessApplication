@@ -39,7 +39,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Angsana New", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.label1.Location = new System.Drawing.Point(64, 46);
+            this.label1.Location = new System.Drawing.Point(192, 3);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(293, 50);
             this.label1.TabIndex = 0;
@@ -49,7 +49,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Angsana New", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.label2.Location = new System.Drawing.Point(68, 106);
+            this.label2.Location = new System.Drawing.Point(196, 45);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 26);
             this.label2.TabIndex = 1;
@@ -62,7 +62,7 @@
             this.invInput.BorderFocusColor = System.Drawing.Color.HotPink;
             this.invInput.BorderRadius = 0;
             this.invInput.BorderSize = 2;
-            this.invInput.Location = new System.Drawing.Point(73, 149);
+            this.invInput.Location = new System.Drawing.Point(201, 88);
             this.invInput.Multiline = true;
             this.invInput.Name = "invInput";
             this.invInput.PasswordChar = false;
@@ -82,7 +82,7 @@
             this.previewBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.previewBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.previewBtn.ForeColor = System.Drawing.Color.White;
-            this.previewBtn.Location = new System.Drawing.Point(73, 229);
+            this.previewBtn.Location = new System.Drawing.Point(201, 136);
             this.previewBtn.Name = "previewBtn";
             this.previewBtn.Size = new System.Drawing.Size(284, 40);
             this.previewBtn.TabIndex = 3;
@@ -99,7 +99,7 @@
             this.CloseBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CloseBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.CloseBtn.ForeColor = System.Drawing.Color.White;
-            this.CloseBtn.Location = new System.Drawing.Point(73, 298);
+            this.CloseBtn.Location = new System.Drawing.Point(201, 188);
             this.CloseBtn.Name = "CloseBtn";
             this.CloseBtn.Size = new System.Drawing.Size(284, 40);
             this.CloseBtn.TabIndex = 4;
@@ -111,7 +111,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(434, 411);
+            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.ClientSize = new System.Drawing.Size(695, 476);
             this.Controls.Add(this.CloseBtn);
             this.Controls.Add(this.previewBtn);
             this.Controls.Add(this.invInput);

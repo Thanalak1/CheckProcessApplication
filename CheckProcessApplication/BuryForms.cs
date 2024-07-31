@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormsApp1;
+using WindowsFormsApp2;
 
 namespace CheckProcessApplication
 {
@@ -25,27 +28,43 @@ namespace CheckProcessApplication
             this.Close();
         }
 
+        ReportDocument cReport;
+        protected string xsdFile
+        {
+            get
+            {
+                var s = cReport.FileName.Replace(".rpt", ".xsd");
+                return s.Replace("rassdk://", "");
+            }
+
+        }
+
         private void previewBtn_Click(object sender, EventArgs e)
         {
-            String inv = InvInput.Texts;
-            String sqlQuery = "select * from V_InlaidReport_Testing where Inv_No = '" + inv + "' order by DocNo asc;";
+            if (string.IsNullOrEmpty(InvInput.Texts)) { return; }
+            var WHERE = $"WHERE Inv_No = '{InvInput.Texts}'";
+            Center.cmd.CommandText = $"select * from V_Bury {WHERE} order by DocNo, JobBarcode";
 
-            PreviewBuryReports previewBury = new PreviewBuryReports();
-            BuryReports reports = new BuryReports();
+            var dt = Center.Load();
+            if (dt.Rows.Count == 0)
+            {
+                MessageBox.Show($"ไม่พบข้อมูล Inv. {InvInput.Texts}", "ERROR!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-            SqlCommand comm = new SqlCommand(sqlQuery, conn);
-            SqlDataAdapter adap = new SqlDataAdapter(comm);
+            cReport = new ReportDocument();
             DataSet ds = new DataSet();
-            adap.SelectCommand.CommandTimeout = 360;
-            adap.Fill(ds, "V_InlaidReport_Testing");
-            reports.SetDataSource(ds);
+            if (!ds.Tables.Contains(dt.TableName))
+                ds.Tables.Add(dt.Copy());
 
-            reports.SetDatabaseLogon("admin", "jp", "server", "PrincessData");
-            reports.VerifyDatabase();
-            previewBury.crystalReportViewer1.ReportSource = reports;
-            previewBury.crystalReportViewer1.Refresh();
-            previewBury.Show();
-            conn.Close();
+            cReport.Load($"D:\\Best_Project\\JPM-Check-Job\\CheckProcessApplication\\Reports\\BuryReport.rpt");
+            ds.WriteXmlSchema(xsdFile);
+            cReport.SetDataSource(dt);
+            var u = new uReportViewer(cReport);
+            u.WindowState = FormWindowState.Maximized;
+            u.Show();
+
+            System.IO.File.Delete(xsdFile);
         }
     }
 }

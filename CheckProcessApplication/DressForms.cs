@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormsApp1;
+using WindowsFormsApp2;
 
 namespace CheckProcessApplication
 {
@@ -27,70 +30,43 @@ namespace CheckProcessApplication
             this.Close();
         }
 
+        ReportDocument cReport;
+        protected string xsdFile
+        {
+            get
+            {
+                var s = cReport.FileName.Replace(".rpt", ".xsd");
+                return s.Replace("rassdk://", "");
+            }
+
+        }
+
         private void previewBtn_Click(object sender, EventArgs e)
         {
-            //String inv = InvInput.Texts;
-            //String sqlQuery = "select * from V_Dress where Inv_No = '" + inv + "' order by DocNo, JobBarCode asc;";
+            if (string.IsNullOrEmpty(InvInput.Texts)) { return; }
+            var WHERE = $"WHERE Inv_No = '{InvInput.Texts}'";
+            Center.cmd.CommandText = $"select * from V_DressV2 {WHERE} order by DocNo, JobBarcode";
 
-            //PreviewDress previewDress = new PreviewDress();
-            //DressReports reports = new DressReports();
+            var dt = Center.Load();
+            if (dt.Rows.Count == 0)
+            {
+                MessageBox.Show($"ไม่พบข้อมูล Inv. {InvInput.Texts}", "ERROR!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-            //SqlCommand comm = new SqlCommand(sqlQuery, conn);
-            //SqlDataAdapter adap = new SqlDataAdapter(comm);
-            //DataSet ds = new DataSet();
-            //adap.SelectCommand.CommandTimeout = 360;
-            //adap.Fill(ds, "V_Dress");
-            //reports.SetDataSource(ds);
+            cReport = new ReportDocument();
+            DataSet ds = new DataSet();
+            if (!ds.Tables.Contains(dt.TableName))
+                ds.Tables.Add(dt.Copy());
 
-            //reports.SetDatabaseLogon("admin", "jp", "server", "PrincessData");
-            //reports.VerifyDatabase();
-            //previewDress.crystalReportViewer1.ReportSource = reports;
-            //previewDress.crystalReportViewer1.Refresh();
-            //previewDress.Show();
-            //conn.Close();
+            cReport.Load($"D:\\Best_Project\\JPM-Check-Job\\CheckProcessApplication\\Reports\\DressReport.rpt");
+            ds.WriteXmlSchema(xsdFile);
+            cReport.SetDataSource(dt);
+            var u = new uReportViewer(cReport);
+            u.WindowState = FormWindowState.Maximized;
+            u.Show();
 
-            //string sqlQuery = "select * from V_DressV2 where Inv_No = @Inv order by DocNo asc;";
-            //DataTable dt;
-
-            //DatabaseConnections db = new DatabaseConnections();
-            //SqlParameter[] parameters = { 
-            //    new SqlParameter("@Inv", InvInput.Texts)
-            //};
-
-            //dt = db.ExecuteQuery(sqlQuery, parameters);
-
-            //foreach (DataRow row in dt.Rows)
-            //{
-            //    foreach (DataColumn column in dt.Columns)
-            //    {
-            //        Console.WriteLine(column.ColumnName);
-            //    }
-            //}
-
-            //PreviewDressSecondForm form = new PreviewDressSecondForm();
-            //DressReport2 report = new DressReport2();
-
-            //report.SetDataSource(dt);
-            //form.crystalReportViewer1.ReportSource = report;
-            //form.crystalReportViewer1.Refresh();
-            //form.Show();
-
-            string sqlQuery = "select * from V_DressV2 where Inv_No = @Inv order by DocNo asc;";
-            DataTable dt;
-
-            DatabaseConnections db = new DatabaseConnections();
-            SqlParameter[] parameters = {
-                new SqlParameter("@Inv", InvInput.Texts)
-            };
-
-            dt = db.ExecuteQuery(sqlQuery, parameters);
-
-            string Path = "D:\\Best_Project\\CheckProcessProject\\CheckProcessApplication\\CheckProcessApplication\\";
-            string fileName = "DressReport2.rpt";
-            string fullPath = Path + fileName;
-
-            ReportGenerator report = new ReportGenerator();
-            report.ShowReport(fullPath, dt);
+            System.IO.File.Delete(xsdFile);
         }
     }
 }
