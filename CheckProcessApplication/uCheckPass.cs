@@ -37,9 +37,9 @@ namespace CheckProcessApplication
         {
             var fWHERE = "WHERE";
             if (Convert.ToInt16(cboStatus.SelectedValue) == (int)AppSetting.ePassStatus.All)
-                fWHERE += " JobHead.mDate BETWEEN @DateStart AND @DateEnd";
-            else if (Convert.ToInt16(cboStatus.SelectedValue) != (int)AppSetting.ePassStatus.NotPass)
-                fWHERE += " JobDetail.pass_date IS NULL";
+                fWHERE += " JobHead.mDate BETWEEN @DateStart AND @DateEnd AND ((JobDetail.pass_date BETWEEN @DateStart AND @DateEnd) OR JobDetail.pass_date IS NULL)";
+            else if (Convert.ToInt16(cboStatus.SelectedValue) == (int)AppSetting.ePassStatus.NotPass)
+                fWHERE += " JobHead.mDate BETWEEN @DateStart AND @DateEnd AND JobDetail.pass_date IS NULL";
             else
                 fWHERE += " JobDetail.pass_date BETWEEN @DateStart AND @DateEnd";
 
@@ -62,7 +62,7 @@ namespace CheckProcessApplication
             var dt = Center.Execute(Center.cmd.CommandText);
             if (dt.Rows.Count == 0)
             {
-                MessageBox.Show($"ไม่พบข้อมูล Inv. {txtEmpCode.Texts}", "ERROR!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"ไม่พบข้อมูล", "ERROR!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -73,18 +73,6 @@ namespace CheckProcessApplication
 
             cReport.Load($"{Application.StartupPath}/Reports/CheckPass.rpt");
 
-            //var result = dt.AsEnumerable()
-            //    .GroupBy(row => new { JobName = row.Field<string>("JobName"), DocNo = row.Field<string>("DocNo")})
-            //    .Select(group => new { gName = group.Key.JobName, gDocNo = group.Key.DocNo, gCount = group.Count() })
-            //    .ToList();
-            //string text = "";
-            //var fSpacing = "";
-            //foreach (var item in result)
-            //{
-            //    text += $"{fSpacing}{item.gName.Trim()} จำนวน {item.gCount}";
-            //    fSpacing = "  |  ";
-            //    Console.WriteLine($"ชื่อ: {item.gName}, จำนวนครั้งที่ปรากฏ: {item.gCount}");
-            //}
             var result = dt.AsEnumerable()
                 .GroupBy(row => row.Field<string>("JobName"))
                 .Select(group => new
