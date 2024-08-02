@@ -62,7 +62,7 @@ namespace CheckProcessApplication
             var dt = Center.Execute(Center.cmd.CommandText);
             if (dt.Rows.Count == 0)
             {
-                MessageBox.Show($"ไม่พบข้อมูล Inv. {txtEmpCode.Texts}", "ERROR!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"ไม่พบข้อมูล", "ERROR!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
