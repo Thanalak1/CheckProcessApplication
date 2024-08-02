@@ -73,18 +73,37 @@ namespace CheckProcessApplication
 
             cReport.Load($"{Application.StartupPath}/Reports/CheckPass.rpt");
 
+            //var result = dt.AsEnumerable()
+            //    .GroupBy(row => new { JobName = row.Field<string>("JobName"), DocNo = row.Field<string>("DocNo")})
+            //    .Select(group => new { gName = group.Key.JobName, gDocNo = group.Key.DocNo, gCount = group.Count() })
+            //    .ToList();
+            //string text = "";
+            //var fSpacing = "";
+            //foreach (var item in result)
+            //{
+            //    text += $"{fSpacing}{item.gName.Trim()} จำนวน {item.gCount}";
+            //    fSpacing = "  |  ";
+            //    Console.WriteLine($"ชื่อ: {item.gName}, จำนวนครั้งที่ปรากฏ: {item.gCount}");
+            //}
             var result = dt.AsEnumerable()
                 .GroupBy(row => row.Field<string>("JobName"))
-                .Select(group => new { Name = group.Key, Count = group.Count() })
-                .ToList();
+                .Select(group => new
+                {
+                    JobName = group.Key,
+                    Count = group.Select(row => row.Field<string>("DocNo"))
+                    .Distinct()
+                    .Count()
+                });
+
             string text = "";
             var fSpacing = "";
             foreach (var item in result)
             {
-                text += $"{fSpacing}{item.Name.Trim()} จำนวน {item.Count}";
+                text += $"{fSpacing}{item.JobName.Trim()} จำนวน {item.Count}";
                 fSpacing = "  |  ";
-                Console.WriteLine($"ชื่อ: {item.Name}, จำนวนครั้งที่ปรากฏ: {item.Count}");
+                Console.WriteLine($"{item.JobName}, จำนวนครั้งที่ปรากฏ: {item.Count}");
             }
+
             cReport.DataDefinition.FormulaFields["CountJobName"].Text = JPM.SetPrint.SetString(text);
             ds.WriteXmlSchema(xsdFile);
             cReport.SetDataSource(dt);
