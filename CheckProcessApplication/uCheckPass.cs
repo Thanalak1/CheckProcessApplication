@@ -78,7 +78,7 @@ namespace CheckProcessApplication
                 .Select(group => new { Name = group.Key, Count = group.Count() })
                 .ToList();
             string text = "";
-            var fSpacing = "\n";
+            var fSpacing = "";
             foreach (var item in result)
             {
                 text += $"{fSpacing}{item.Name.Trim()} จำนวน {item.Count}";
