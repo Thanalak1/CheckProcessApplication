@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using System;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using CrystalDecisions.CrystalReports.Engine;
-using WindowsFormsApp1;
 using WindowsFormsApp2;
 
 namespace CheckProcessApplication

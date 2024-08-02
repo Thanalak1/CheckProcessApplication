@@ -183,6 +183,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Class\Center.cs" />
+    <Compile Include="Class\AppSetting.cs" />
+    <Compile Include="Class\Data.cs" />
+    <Compile Include="Class\DataObject.cs" />
+    <Compile Include="Class\Global.cs" />
+    <Compile Include="Class\SetPrint.cs" />
+    <Compile Include="Class\UI.cs" />
     <Compile Include="completeForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -292,6 +298,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportGenerator.cs" />
+    <Compile Include="Reports\CheckPass.cs">
+      <DependentUpon>CheckPass.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reports\CrystalReport1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -303,6 +315,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CrystalReport2.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="uCheckPass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="uCheckPass.Designer.cs">
+      <DependentUpon>uCheckPass.cs</DependentUpon>
     </Compile>
     <Compile Include="Viewer\uReportViewer.cs">
       <SubType>Form</SubType>
@@ -392,6 +410,11 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Reports\CheckPass.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CheckPass.cs</LastGenOutput>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\CrystalReport1.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CrystalReport1.cs</LastGenOutput>
@@ -401,6 +424,9 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CrystalReport2.cs</LastGenOutput>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="uCheckPass.resx">
+      <DependentUpon>uCheckPass.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Viewer\uReportViewer.resx">
       <DependentUpon>uReportViewer.cs</DependentUpon>

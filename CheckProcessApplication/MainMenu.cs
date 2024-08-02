@@ -161,7 +161,8 @@ namespace CheckProcessApplication
 
         private void FoundryAndDressBtn_Click(object sender, EventArgs e)
         {
-
+            openChildForms(new uCheckPass());
+            hideSubMenu();
         }
 
         private void DressAndPolishBtn_Click(object sender, EventArgs e)

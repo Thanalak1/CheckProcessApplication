@@ -1,8 +1,9 @@
 ﻿using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
-namespace WindowsFormsApp1
+namespace CheckProcessApplication
 {
     internal class Center
     {
@@ -16,6 +17,7 @@ namespace WindowsFormsApp1
         private static SqlDataAdapter da;
         private static BindingSource bs;
         private static string sql;
+        private static SqlParameter SqlParameter;
         public static SqlCommand cmd = new SqlCommand("", con);
         public static DataSet ds;
         public static DataTable dt;
@@ -45,21 +47,41 @@ namespace WindowsFormsApp1
             closeConnection();
             return dt;
         }
-
+            
         public static DataTable Execute(string CommandText)
         {
-            openConnection();
-            cmd = new SqlCommand(CommandText, con);
-            da = new SqlDataAdapter(cmd);
-            dt = new DataTable();
-            da.Fill(dt);
-            closeConnection();
+            try
+            {
+                openConnection();
+                da = new SqlDataAdapter(cmd);
+                dt = new DataTable();
+                da.Fill(dt);
+                closeConnection();
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                cmd.Parameters.Clear();
+            }
             return dt;
         }
 
         public static DataTable CurrentDataTable()
         {
             return dt;
+        }
+
+        public static void AddParameter(IDbCommand cmd, string Name, object value)
+        {
+            //SqlParameter = new SqlParameter(Name, value.GetType());
+            DbParameter result = new SqlParameter(Name, value.GetType());
+            IDataParameter dataParameter = result;
+            dataParameter.Value = value;
+            cmd.Parameters.Add(dataParameter);
         }
     }
 }
