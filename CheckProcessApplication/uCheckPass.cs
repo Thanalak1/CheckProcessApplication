@@ -37,7 +37,7 @@ namespace CheckProcessApplication
         {
             var fWHERE = "WHERE";
             if (Convert.ToInt16(cboStatus.SelectedValue) == (int)AppSetting.ePassStatus.All)
-                fWHERE += " JobHead.mDate BETWEEN @DateStart AND @DateEnd AND ((JobDetail.pass_date BETWEEN @DateStart AND @DateEnd) OR JobDetail.pass_date IS NULL)";
+                fWHERE += " JobHead.mDate BETWEEN @DateStart AND @DateEnd";
             else if (Convert.ToInt16(cboStatus.SelectedValue) == (int)AppSetting.ePassStatus.NotPass)
                 fWHERE += " JobHead.mDate BETWEEN @DateStart AND @DateEnd AND JobDetail.pass_date IS NULL";
             else
@@ -51,7 +51,7 @@ namespace CheckProcessApplication
                 fWHERE += $" AND JobHead.JobType = {cboJobName.SelectedValue}";
 
             Center.cmd.CommandText = $"SELECT JobHead.JobName, JobDetail.CustCode, JobDetail.OrderNo, JobDetail.ListNo, JobHead.EmpCode, JobHead.EmpName, JobHead.DocNo, JobDetail.JobBarcode" +
-                $", JobDetail.pass_date, JobHead.JobDate, JobHead.DueDate, JobHead.UserName, CASE WHEN JobDetail.pass_ok = 0 THEN 'ยังไม่ได้ตรวจออก' ELSE 'ตรวจออกแล้ว' END AS pass_ok" +
+                $", JobDetail.pass_date, JobHead.JobDate, JobHead.DueDate, JobDetail.UserName, CASE WHEN JobDetail.pass_ok = 0 THEN 'ยังไม่ได้ตรวจออก' ELSE 'ตรวจออกแล้ว' END AS pass_ok" +
                 $" FROM JobHead LEFT JOIN JobDetail ON JobHead.DocNo = JobDetail.DocNo AND JobHead.EmpCode = JobDetail.EmpCode" +
                 $" {fWHERE}" +
                 $" ORDER BY JobHead.JobType, JobHead.DocNo";
