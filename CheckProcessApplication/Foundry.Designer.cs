@@ -134,10 +134,9 @@
             this.label3.Font = new System.Drawing.Font("Angsana New", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.label3.Location = new System.Drawing.Point(221, 111);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(49, 26);
+            this.label3.Size = new System.Drawing.Size(89, 26);
             this.label3.TabIndex = 11;
-            this.label3.Text = "Inv No.";
-            this.label3.Visible = false;
+            this.label3.Text = "จำนวนที่ใช้หาร";
             // 
             // Foundry
             // 
