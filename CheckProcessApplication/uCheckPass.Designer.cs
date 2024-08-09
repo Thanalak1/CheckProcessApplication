@@ -40,6 +40,12 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.btnDelete = new CheckProcessApplication.CustomTools.BtnCustom();
+            this.btnCustom2 = new CheckProcessApplication.CustomTools.BtnCustom();
+            this.txtOrderNo = new CheckProcessApplication.CustomTools.TextBoxCustom();
+            this.previewBtn = new CheckProcessApplication.CustomTools.BtnCustom();
+            this.txtEmpCode = new CheckProcessApplication.CustomTools.TextBoxCustom();
             this.cSelected = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.cJobBarcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cBillNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,15 +53,10 @@
             this.cListNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cJobName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cEmpCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cpass_ok = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cpass_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.btnDelete = new CheckProcessApplication.CustomTools.BtnCustom();
-            this.btnCustom2 = new CheckProcessApplication.CustomTools.BtnCustom();
-            this.txtOrderNo = new CheckProcessApplication.CustomTools.TextBoxCustom();
-            this.previewBtn = new CheckProcessApplication.CustomTools.BtnCustom();
-            this.txtEmpCode = new CheckProcessApplication.CustomTools.TextBoxCustom();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -177,6 +178,7 @@
             this.cListNo,
             this.cJobName,
             this.cEmpCode,
+            this.Column1,
             this.cpass_ok,
             this.cpass_date,
             this.cID});
@@ -186,85 +188,6 @@
             this.dataGridView1.TabIndex = 28;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.CurrentCellDirtyStateChanged += new System.EventHandler(this.dataGridView1_CurrentCellDirtyStateChanged);
-            // 
-            // cSelected
-            // 
-            this.cSelected.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.cSelected.DataPropertyName = "Selected";
-            this.cSelected.HeaderText = "#";
-            this.cSelected.Name = "cSelected";
-            this.cSelected.Width = 20;
-            // 
-            // cJobBarcode
-            // 
-            this.cJobBarcode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.cJobBarcode.DataPropertyName = "JobBarcode";
-            this.cJobBarcode.HeaderText = "รหัสรับงานช่าง";
-            this.cJobBarcode.Name = "cJobBarcode";
-            this.cJobBarcode.Width = 76;
-            // 
-            // cBillNo
-            // 
-            this.cBillNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.cBillNo.DataPropertyName = "BillNo";
-            this.cBillNo.HeaderText = "เลขที่บิลจ่ายงาน";
-            this.cBillNo.Name = "cBillNo";
-            this.cBillNo.Width = 80;
-            // 
-            // cOrderNo
-            // 
-            this.cOrderNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.cOrderNo.DataPropertyName = "OrderNo";
-            this.cOrderNo.HeaderText = "Order No.";
-            this.cOrderNo.Name = "cOrderNo";
-            this.cOrderNo.Width = 72;
-            // 
-            // cListNo
-            // 
-            this.cListNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.cListNo.DataPropertyName = "ListNo";
-            this.cListNo.HeaderText = "ลำดับที่";
-            this.cListNo.Name = "cListNo";
-            this.cListNo.Width = 60;
-            // 
-            // cJobName
-            // 
-            this.cJobName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.cJobName.DataPropertyName = "JobName";
-            this.cJobName.HeaderText = "ประเภทงาน";
-            this.cJobName.Name = "cJobName";
-            this.cJobName.Width = 80;
-            // 
-            // cEmpCode
-            // 
-            this.cEmpCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.cEmpCode.DataPropertyName = "EmpCode";
-            this.cEmpCode.HeaderText = "รหัสช่าง";
-            this.cEmpCode.Name = "cEmpCode";
-            this.cEmpCode.Width = 63;
-            // 
-            // cpass_ok
-            // 
-            this.cpass_ok.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.cpass_ok.DataPropertyName = "pass_ok";
-            this.cpass_ok.HeaderText = "สถานะการทำงาน";
-            this.cpass_ok.Name = "cpass_ok";
-            this.cpass_ok.Width = 86;
-            // 
-            // cpass_date
-            // 
-            this.cpass_date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.cpass_date.DataPropertyName = "pass_date";
-            this.cpass_date.HeaderText = "วันที่ตรวจออก";
-            this.cpass_date.Name = "cpass_date";
-            this.cpass_date.Width = 89;
-            // 
-            // cID
-            // 
-            this.cID.DataPropertyName = "ID";
-            this.cID.HeaderText = "ID";
-            this.cID.Name = "cID";
-            this.cID.Visible = false;
             // 
             // checkBox1
             // 
@@ -367,6 +290,93 @@
             this.txtEmpCode.Texts = "";
             this.txtEmpCode.UnderLineStyle = false;
             // 
+            // cSelected
+            // 
+            this.cSelected.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.cSelected.DataPropertyName = "Selected";
+            this.cSelected.HeaderText = "#";
+            this.cSelected.Name = "cSelected";
+            this.cSelected.Width = 20;
+            // 
+            // cJobBarcode
+            // 
+            this.cJobBarcode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.cJobBarcode.DataPropertyName = "JobBarcode";
+            this.cJobBarcode.HeaderText = "รหัสรับงานช่าง";
+            this.cJobBarcode.Name = "cJobBarcode";
+            this.cJobBarcode.Width = 99;
+            // 
+            // cBillNo
+            // 
+            this.cBillNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.cBillNo.DataPropertyName = "DocNo";
+            this.cBillNo.HeaderText = "เลขที่บิลจ่ายงาน";
+            this.cBillNo.Name = "cBillNo";
+            this.cBillNo.Width = 80;
+            // 
+            // cOrderNo
+            // 
+            this.cOrderNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.cOrderNo.DataPropertyName = "OrderNo";
+            this.cOrderNo.HeaderText = "Order No.";
+            this.cOrderNo.Name = "cOrderNo";
+            this.cOrderNo.Width = 72;
+            // 
+            // cListNo
+            // 
+            this.cListNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.cListNo.DataPropertyName = "ListNo";
+            this.cListNo.HeaderText = "ลำดับที่";
+            this.cListNo.Name = "cListNo";
+            this.cListNo.Width = 60;
+            // 
+            // cJobName
+            // 
+            this.cJobName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.cJobName.DataPropertyName = "JobName";
+            this.cJobName.HeaderText = "ประเภทงาน";
+            this.cJobName.Name = "cJobName";
+            this.cJobName.Width = 80;
+            // 
+            // cEmpCode
+            // 
+            this.cEmpCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.cEmpCode.DataPropertyName = "EmpCode";
+            this.cEmpCode.HeaderText = "รหัสช่าง";
+            this.cEmpCode.Name = "cEmpCode";
+            this.cEmpCode.Width = 63;
+            // 
+            // Column1
+            // 
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Column1.DataPropertyName = "EmpName";
+            this.Column1.HeaderText = "ชื่อช่าง";
+            this.Column1.Name = "Column1";
+            this.Column1.Width = 58;
+            // 
+            // cpass_ok
+            // 
+            this.cpass_ok.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.cpass_ok.DataPropertyName = "pass_ok";
+            this.cpass_ok.HeaderText = "สถานะการทำงาน";
+            this.cpass_ok.Name = "cpass_ok";
+            this.cpass_ok.Width = 86;
+            // 
+            // cpass_date
+            // 
+            this.cpass_date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.cpass_date.DataPropertyName = "pass_date";
+            this.cpass_date.HeaderText = "วันที่ตรวจออก";
+            this.cpass_date.Name = "cpass_date";
+            this.cpass_date.Width = 89;
+            // 
+            // cID
+            // 
+            this.cID.DataPropertyName = "ID";
+            this.cID.HeaderText = "ID";
+            this.cID.Name = "cID";
+            this.cID.Visible = false;
+            // 
             // uCheckPass
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -427,6 +437,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cListNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn cJobName;
         private System.Windows.Forms.DataGridViewTextBoxColumn cEmpCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn cpass_ok;
         private System.Windows.Forms.DataGridViewTextBoxColumn cpass_date;
         private System.Windows.Forms.DataGridViewTextBoxColumn cID;
