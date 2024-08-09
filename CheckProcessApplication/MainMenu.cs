@@ -12,10 +12,21 @@ namespace CheckProcessApplication
 {
     public partial class MainMenu : Form
     {
+        private void showAllMainButtons()
+        {
+            FoundryMain.Visible = true;
+            DressMain.Visible = false;
+            PolishMain.Visible = false;
+            BuryMain.Visible = false;
+            BatheMain.Visible = false;
+            CompleteMain.Visible = false;
+        }
+
         public MainMenu()
         {
             InitializeComponent();
             customizeDesign();
+            showAllMainButtons();
         }
 
         private void customizeDesign() {
@@ -67,7 +78,7 @@ namespace CheckProcessApplication
 
         private void FoundryMain_Click(object sender, EventArgs e)
         {
-            showSubMenu(FoundryPanelSub);
+            openChildForms(new uCheckPass());
         }
 
         private void DressMain_Click(object sender, EventArgs e)

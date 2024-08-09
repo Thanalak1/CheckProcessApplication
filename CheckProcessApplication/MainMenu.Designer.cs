@@ -88,7 +88,7 @@
             this.MenuPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.MenuPanel.Location = new System.Drawing.Point(0, 0);
             this.MenuPanel.Name = "MenuPanel";
-            this.MenuPanel.Size = new System.Drawing.Size(173, 515);
+            this.MenuPanel.Size = new System.Drawing.Size(173, 754);
             this.MenuPanel.TabIndex = 0;
             // 
             // panelComplete
@@ -480,8 +480,8 @@
             this.FoundryMain.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.FoundryMain.Size = new System.Drawing.Size(173, 30);
             this.FoundryMain.TabIndex = 3;
-            this.FoundryMain.Text = "ตรวจงานหล่อ";
-            this.FoundryMain.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.FoundryMain.Text = "ตรวจงานออก";
+            this.FoundryMain.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.FoundryMain.UseVisualStyleBackColor = false;
             this.FoundryMain.Click += new System.EventHandler(this.FoundryMain_Click);
             // 
@@ -495,7 +495,7 @@
             this.CloseBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CloseBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.CloseBtn.ForeColor = System.Drawing.Color.White;
-            this.CloseBtn.Location = new System.Drawing.Point(0, 482);
+            this.CloseBtn.Location = new System.Drawing.Point(0, 721);
             this.CloseBtn.Name = "CloseBtn";
             this.CloseBtn.Size = new System.Drawing.Size(173, 33);
             this.CloseBtn.TabIndex = 2;
@@ -528,7 +528,7 @@
             this.ProgramPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ProgramPanel.Location = new System.Drawing.Point(173, 0);
             this.ProgramPanel.Name = "ProgramPanel";
-            this.ProgramPanel.Size = new System.Drawing.Size(711, 515);
+            this.ProgramPanel.Size = new System.Drawing.Size(911, 754);
             this.ProgramPanel.TabIndex = 1;
             // 
             // MainMenu
@@ -536,7 +536,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(884, 515);
+            this.ClientSize = new System.Drawing.Size(1084, 754);
             this.Controls.Add(this.ProgramPanel);
             this.Controls.Add(this.MenuPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
