@@ -64,7 +64,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Angsana New", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.label3.Location = new System.Drawing.Point(12, 131);
+            this.label3.Location = new System.Drawing.Point(12, 98);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(62, 26);
             this.label3.TabIndex = 18;
@@ -74,7 +74,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Angsana New", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.label2.Location = new System.Drawing.Point(12, 78);
+            this.label2.Location = new System.Drawing.Point(12, 45);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 26);
             this.label2.TabIndex = 14;
@@ -84,7 +84,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Angsana New", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.label1.Location = new System.Drawing.Point(330, 9);
+            this.label1.Location = new System.Drawing.Point(330, -5);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(262, 50);
             this.label1.TabIndex = 12;
@@ -93,7 +93,7 @@
             // DateStart
             // 
             this.DateStart.Font = new System.Drawing.Font("Angsana New", 14.25F);
-            this.DateStart.Location = new System.Drawing.Point(419, 73);
+            this.DateStart.Location = new System.Drawing.Point(419, 40);
             this.DateStart.Name = "DateStart";
             this.DateStart.Size = new System.Drawing.Size(159, 33);
             this.DateStart.TabIndex = 19;
@@ -101,7 +101,7 @@
             // DateEnd
             // 
             this.DateEnd.Font = new System.Drawing.Font("Angsana New", 14.25F);
-            this.DateEnd.Location = new System.Drawing.Point(419, 126);
+            this.DateEnd.Location = new System.Drawing.Point(419, 93);
             this.DateEnd.Name = "DateEnd";
             this.DateEnd.Size = new System.Drawing.Size(159, 33);
             this.DateEnd.TabIndex = 20;
@@ -110,7 +110,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Angsana New", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.label4.Location = new System.Drawing.Point(378, 78);
+            this.label4.Location = new System.Drawing.Point(378, 45);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 26);
             this.label4.TabIndex = 21;
@@ -120,7 +120,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Angsana New", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.label5.Location = new System.Drawing.Point(388, 131);
+            this.label5.Location = new System.Drawing.Point(388, 98);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(25, 26);
             this.label5.TabIndex = 22;
@@ -131,7 +131,7 @@
             this.cboJobName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboJobName.Font = new System.Drawing.Font("Angsana New", 14.25F);
             this.cboJobName.FormattingEnabled = true;
-            this.cboJobName.Location = new System.Drawing.Point(17, 209);
+            this.cboJobName.Location = new System.Drawing.Point(17, 165);
             this.cboJobName.Name = "cboJobName";
             this.cboJobName.Size = new System.Drawing.Size(185, 34);
             this.cboJobName.TabIndex = 24;
@@ -141,7 +141,7 @@
             this.cboStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboStatus.Font = new System.Drawing.Font("Angsana New", 14.25F);
             this.cboStatus.FormattingEnabled = true;
-            this.cboStatus.Location = new System.Drawing.Point(246, 209);
+            this.cboStatus.Location = new System.Drawing.Point(246, 165);
             this.cboStatus.Name = "cboStatus";
             this.cboStatus.Size = new System.Drawing.Size(185, 34);
             this.cboStatus.TabIndex = 25;
@@ -150,7 +150,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Angsana New", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.label6.Location = new System.Drawing.Point(12, 180);
+            this.label6.Location = new System.Drawing.Point(12, 136);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(73, 26);
             this.label6.TabIndex = 26;
@@ -160,7 +160,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Angsana New", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.label7.Location = new System.Drawing.Point(241, 180);
+            this.label7.Location = new System.Drawing.Point(241, 136);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(112, 26);
             this.label7.TabIndex = 27;
@@ -182,9 +182,9 @@
             this.cpass_ok,
             this.cpass_date,
             this.cID});
-            this.dataGridView1.Location = new System.Drawing.Point(16, 273);
+            this.dataGridView1.Location = new System.Drawing.Point(16, 211);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(867, 384);
+            this.dataGridView1.Size = new System.Drawing.Size(1017, 446);
             this.dataGridView1.TabIndex = 28;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.CurrentCellDirtyStateChanged += new System.EventHandler(this.dataGridView1_CurrentCellDirtyStateChanged);
@@ -194,7 +194,7 @@
             this.checkBox1.AutoSize = true;
             this.checkBox1.Checked = true;
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(455, 218);
+            this.checkBox1.Location = new System.Drawing.Point(455, 174);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(123, 17);
             this.checkBox1.TabIndex = 29;
@@ -211,7 +211,7 @@
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.btnDelete.ForeColor = System.Drawing.Color.White;
-            this.btnDelete.Location = new System.Drawing.Point(608, 663);
+            this.btnDelete.Location = new System.Drawing.Point(758, 663);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(136, 40);
             this.btnDelete.TabIndex = 32;
@@ -228,7 +228,7 @@
             this.btnCustom2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCustom2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.btnCustom2.ForeColor = System.Drawing.Color.White;
-            this.btnCustom2.Location = new System.Drawing.Point(608, 209);
+            this.btnCustom2.Location = new System.Drawing.Point(608, 165);
             this.btnCustom2.Name = "btnCustom2";
             this.btnCustom2.Size = new System.Drawing.Size(103, 40);
             this.btnCustom2.TabIndex = 31;
@@ -243,7 +243,7 @@
             this.txtOrderNo.BorderFocusColor = System.Drawing.Color.HotPink;
             this.txtOrderNo.BorderRadius = 0;
             this.txtOrderNo.BorderSize = 2;
-            this.txtOrderNo.Location = new System.Drawing.Point(80, 131);
+            this.txtOrderNo.Location = new System.Drawing.Point(80, 98);
             this.txtOrderNo.Multiline = true;
             this.txtOrderNo.Name = "txtOrderNo";
             this.txtOrderNo.PasswordChar = false;
@@ -264,7 +264,7 @@
             this.previewBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.previewBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.previewBtn.ForeColor = System.Drawing.Color.White;
-            this.previewBtn.Location = new System.Drawing.Point(750, 663);
+            this.previewBtn.Location = new System.Drawing.Point(900, 663);
             this.previewBtn.Name = "previewBtn";
             this.previewBtn.Size = new System.Drawing.Size(133, 40);
             this.previewBtn.TabIndex = 15;
@@ -279,7 +279,7 @@
             this.txtEmpCode.BorderFocusColor = System.Drawing.Color.HotPink;
             this.txtEmpCode.BorderRadius = 0;
             this.txtEmpCode.BorderSize = 2;
-            this.txtEmpCode.Location = new System.Drawing.Point(80, 78);
+            this.txtEmpCode.Location = new System.Drawing.Point(80, 45);
             this.txtEmpCode.Multiline = true;
             this.txtEmpCode.Name = "txtEmpCode";
             this.txtEmpCode.PasswordChar = false;
@@ -294,9 +294,9 @@
             // 
             this.cSelected.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.cSelected.DataPropertyName = "Selected";
-            this.cSelected.HeaderText = "#";
+            this.cSelected.HeaderText = "เลือกรายการ";
             this.cSelected.Name = "cSelected";
-            this.cSelected.Width = 20;
+            this.cSelected.Width = 73;
             // 
             // cJobBarcode
             // 
@@ -382,7 +382,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(895, 715);
+            this.ClientSize = new System.Drawing.Size(1045, 715);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnCustom2);
             this.Controls.Add(this.checkBox1);

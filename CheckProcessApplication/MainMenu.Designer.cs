@@ -528,7 +528,7 @@
             this.ProgramPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ProgramPanel.Location = new System.Drawing.Point(173, 0);
             this.ProgramPanel.Name = "ProgramPanel";
-            this.ProgramPanel.Size = new System.Drawing.Size(911, 754);
+            this.ProgramPanel.Size = new System.Drawing.Size(1061, 754);
             this.ProgramPanel.TabIndex = 1;
             // 
             // MainMenu
@@ -536,7 +536,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(1084, 754);
+            this.ClientSize = new System.Drawing.Size(1234, 754);
             this.Controls.Add(this.ProgramPanel);
             this.Controls.Add(this.MenuPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

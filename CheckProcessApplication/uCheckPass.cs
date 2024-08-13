@@ -141,6 +141,9 @@ namespace CheckProcessApplication
             }
             dataGridView1.AutoGenerateColumns = false;
             dataGridView1.DataSource = dt;
+            dataGridView1.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Tahoma", 14);
+            dataGridView1.DefaultCellStyle.Font = new System.Drawing.Font("Tahoma", 14);
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             previewBtn.Enabled = checkBox1.Checked;
             btnDelete.Enabled = !checkBox1.Checked;
         }
