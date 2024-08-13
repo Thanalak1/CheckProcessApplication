@@ -316,6 +316,12 @@
       <DependentUpon>CrystalReport2.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\PolishCrystalReport.cs">
+      <SubType>Component</SubType>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PolishCrystalReport.rpt</DependentUpon>
+    </Compile>
     <Compile Include="uCheckPass.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -424,6 +430,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CrystalReport2.cs</LastGenOutput>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\PolishCrystalReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PolishCrystalReport.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="uCheckPass.resx">
       <DependentUpon>uCheckPass.cs</DependentUpon>
