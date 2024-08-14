@@ -12,6 +12,8 @@ namespace CheckProcessApplication
 {
     public partial class uCheckPass : Form
     {
+        DataTable _ListPrint;
+        DataTable dt = new DataTable();
         public uCheckPass()
         {
             InitializeComponent();
@@ -31,6 +33,19 @@ namespace CheckProcessApplication
                 return s.Replace("rassdk://", "");
             }
 
+        }
+
+        private DataTable ListPrint
+        {
+            get
+            {
+                if (_ListPrint == null)
+                {
+                    _ListPrint = new DataTable();
+                    _ListPrint = dt.Clone();
+                }
+                return _ListPrint;
+            }
         }
 
         private void previewBtn_Click(object sender, EventArgs e)
@@ -98,10 +113,6 @@ namespace CheckProcessApplication
         {
             Global.Combo.Load(cboStatus, typeof(AppSetting.ePassStatus));
             Global.Combo.Load(cboJobName, new DataObject.JobType(), AppSetting.eComboList.All);
-            //var dt = (DataTable)cboJobName.DataSource;
-            //var drRemove = new[] { 2, 4, 7, 9, 10, 11, 12, 13 };
-            //var Newdt = dt.AsEnumerable().Where(row => !drRemove.Contains(row.Field<int>("JobNum"))).CopyToDataTable();
-            //cboJobName.DataSource = Newdt;
         }
 
         private void btnCustom2_Click(object sender, EventArgs e)
@@ -133,12 +144,23 @@ namespace CheckProcessApplication
             Center.AddParameter(Center.cmd, nameof(DateStart), DateStart.Value.Date);
             Center.AddParameter(Center.cmd, nameof(DateEnd), DateEnd.Value.Date.AddDays(1).AddSeconds(-1));
 
-            var dt = Center.Execute(Center.cmd.CommandText);
+            dt = Center.Execute(Center.cmd.CommandText);
             dt.Columns.Add(cSelected.DataPropertyName, typeof(bool));
+            bool areEqual = false;
             foreach (DataRow dataRow in dt.Rows)
             {
                 dataRow[cSelected.DataPropertyName] = false;
+                foreach (DataRow dataRow1 in ListPrint.Rows)
+                {
+                    areEqual = dataRow1.ItemArray.SequenceEqual(dataRow.ItemArray);
+                    if (areEqual)
+                    {
+                        dataRow[cSelected.DataPropertyName] = true;
+                        break;
+                    }
+                }                
             }
+
             dataGridView1.AutoGenerateColumns = false;
             dataGridView1.DataSource = dt;
             dataGridView1.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Tahoma", 14);
@@ -150,20 +172,27 @@ namespace CheckProcessApplication
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dataGridView1.CurrentRow == null) return;
+            //if (dataGridView1.CurrentRow == null) return;
 
-            switch (dataGridView1.Columns[e.ColumnIndex].Name)
-            {
-                case string s when s == cSelected.Name:
-                    if (dataGridView1.CurrentRow.Cells[cSelected.Name].Value != DBNull.Value)
-                    {
-                        dataGridView1.CommitEdit(DataGridViewDataErrorContexts.Commit);
-                        dataGridView1.CurrentRow.Cells[cSelected.Name].Value = !Convert.ToBoolean(dataGridView1.CurrentRow.Cells[cSelected.Name].Value);
-                    }
-                    else
-                        dataGridView1.CancelEdit();
-                    break;
-            }
+            //switch (dataGridView1.Columns[e.ColumnIndex].Name)
+            //{
+            //    case string s when s == cSelected.Name:
+            //        if (dataGridView1.CurrentRow.Cells[cSelected.Name].Value != DBNull.Value)
+            //        {
+            //            dataGridView1.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            //            dataGridView1.CurrentRow.Cells[cSelected.Name].Value = !Convert.ToBoolean(dataGridView1.CurrentRow.Cells[cSelected.Name].Value);
+            //            bool IsChecked = (bool)dataGridView1.CurrentRow.Cells[cSelected.Name].Value;
+            //            if (IsChecked)
+            //            {
+            //                DataRow newRow = ListPrint.NewRow();
+            //                newRow = dataGridView1.CurrentRow.;
+            //                ListPrint.Rows.Add(newRow);
+            //            }
+            //        }
+            //        else
+            //            dataGridView1.CancelEdit();
+            //        break;
+            //}
         }
 
         private void dataGridView1_CurrentCellDirtyStateChanged(object sender, EventArgs e)
@@ -202,6 +231,38 @@ namespace CheckProcessApplication
             dataGridView1.Refresh();
             btnCustom2_Click(null, null);
 
+        }
+
+        private void btnCustom1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridView1.CurrentRow == null) return;
+            if (dataGridView1.Columns[e.ColumnIndex].Name != dataGridView1.Columns[cSelected.Index].Name) return;
+
+            bool isChecked = (bool)dataGridView1.CurrentRow.Cells[e.ColumnIndex].Value;
+            if (isChecked)
+            {
+                //var newRow = ListPrint.NewRow();
+                var newRow = ((DataRowView)(dataGridView1.CurrentRow.DataBoundItem)).Row;
+                newRow["Selected"] = false;
+                ListPrint.ImportRow(newRow);
+                //ListPrint.Rows.Add(newRow);
+            }
+            else
+            {
+                bool areEqual = false;
+                foreach (DataRow dataRow in ListPrint.Rows)
+                {
+                    areEqual = dataRow.ItemArray.SequenceEqual(((DataRowView)(dataGridView1.CurrentRow.DataBoundItem)).Row.ItemArray);
+                    if (areEqual)
+                        dataRow.Delete();
+                }
+                ListPrint.AcceptChanges();
+            }
         }
     }
 }
