@@ -35,7 +35,7 @@ namespace CheckProcessApplication
 
         }
 
-        private DataTable ListPrint
+        private DataTable dtPrint
         {
             get
             {
@@ -43,31 +43,37 @@ namespace CheckProcessApplication
                 {
                     _ListPrint = new DataTable();
                     _ListPrint = dt.Clone();
+                    _ListPrint.TableName = "Print";
                 }
                 return _ListPrint;
             }
         }
 
+        void SetPrint(DataTable dt)
+        {
+
+        }
         private void previewBtn_Click(object sender, EventArgs e)
         {
-            var dt = ((DataTable)dataGridView1.DataSource).Clone();
-            var dv = new DataView((DataTable)dataGridView1.DataSource);
-            dv.RowFilter = "Selected = true";
-            foreach (DataRow dataRow in dv.ToTable().Rows)
-            {
-                var drNew = dt.NewRow();
-                drNew.ItemArray = dataRow.ItemArray;
-                dt.Rows.Add(drNew);
-            }
+            //var dt = ((DataTable)dataGridView1.DataSource).Clone();
+            //var dv = new DataView((DataTable)dataGridView1.DataSource);
+            //dv.RowFilter = "Selected = true";
+            //foreach (DataRow dataRow in dv.ToTable().Rows)
+            //{
+            //    var drNew = dt.NewRow();
+            //    drNew.ItemArray = dataRow.ItemArray;
+            //    dt.Rows.Add(drNew);
+            //}
 
             cReport = new ReportDocument();
             DataSet ds = new DataSet();
-            if (!ds.Tables.Contains(dt.TableName))
+            if (!ds.Tables.Contains(dtPrint.TableName))
                 ds.Tables.Add(dt.Copy());
 
             cReport.Load($"{Application.StartupPath}/Reports/CheckPass.rpt");
 
-            var result = dt.AsEnumerable()
+            // - SetPrint
+            var result = dtPrint.AsEnumerable()
                 .GroupBy(row => row.Field<string>("JobName"))
                 .Select(group => new
                 {
@@ -86,9 +92,10 @@ namespace CheckProcessApplication
                 Console.WriteLine($"{item.JobName}, จำนวนครั้งที่ปรากฏ: {item.Count}");
             }
 
+            // - Print
             cReport.DataDefinition.FormulaFields["CountJobName"].Text = JPM.SetPrint.SetString(text);
             ds.WriteXmlSchema(xsdFile);
-            cReport.SetDataSource(dt);
+            cReport.SetDataSource(dtPrint);
             var u = new uReportViewer(cReport);
             u.WindowState = FormWindowState.Maximized;
             u.Show();
@@ -150,7 +157,7 @@ namespace CheckProcessApplication
             foreach (DataRow dataRow in dt.Rows)
             {
                 dataRow[cSelected.DataPropertyName] = false;
-                foreach (DataRow dataRow1 in ListPrint.Rows)
+                foreach (DataRow dataRow1 in dtPrint.Rows)
                 {
                     areEqual = dataRow1.ItemArray.SequenceEqual(dataRow.ItemArray);
                     if (areEqual)
@@ -172,27 +179,40 @@ namespace CheckProcessApplication
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            //if (dataGridView1.CurrentRow == null) return;
+            if (dataGridView1.CurrentRow == null) return;
 
-            //switch (dataGridView1.Columns[e.ColumnIndex].Name)
-            //{
-            //    case string s when s == cSelected.Name:
-            //        if (dataGridView1.CurrentRow.Cells[cSelected.Name].Value != DBNull.Value)
-            //        {
-            //            dataGridView1.CommitEdit(DataGridViewDataErrorContexts.Commit);
-            //            dataGridView1.CurrentRow.Cells[cSelected.Name].Value = !Convert.ToBoolean(dataGridView1.CurrentRow.Cells[cSelected.Name].Value);
-            //            bool IsChecked = (bool)dataGridView1.CurrentRow.Cells[cSelected.Name].Value;
-            //            if (IsChecked)
-            //            {
-            //                DataRow newRow = ListPrint.NewRow();
-            //                newRow = dataGridView1.CurrentRow.;
-            //                ListPrint.Rows.Add(newRow);
-            //            }
-            //        }
-            //        else
-            //            dataGridView1.CancelEdit();
-            //        break;
-            //}
+            switch (dataGridView1.Columns[e.ColumnIndex].Name)
+            {
+                case string s when s == cSelected.Name:
+                    if (dataGridView1.CurrentRow.Cells[cSelected.Name].Value != DBNull.Value)
+                    {
+                        dataGridView1.CommitEdit(DataGridViewDataErrorContexts.Commit);
+                        dataGridView1.CurrentRow.Cells[cSelected.Name].Value = !Convert.ToBoolean(dataGridView1.CurrentRow.Cells[cSelected.Name].Value);
+                        bool isChecked = (bool)dataGridView1.CurrentRow.Cells[e.ColumnIndex].Value;
+                        if (isChecked)
+                        {
+                            //var newRow = ListPrint.NewRow();
+                            var newRow = ((DataRowView)(dataGridView1.CurrentRow.DataBoundItem)).Row;
+                            newRow["Selected"] = false;
+                            dtPrint.ImportRow(newRow);
+                            //ListPrint.Rows.Add(newRow);
+                        }
+                        else
+                        {
+                            bool areEqual = false;
+                            foreach (DataRow dataRow in dtPrint.Rows)
+                            {
+                                areEqual = dataRow.ItemArray.SequenceEqual(((DataRowView)(dataGridView1.CurrentRow.DataBoundItem)).Row.ItemArray);
+                                if (areEqual)
+                                    dataRow.Delete();
+                            }
+                            dtPrint.AcceptChanges();
+                        }
+                    }
+                    else
+                        dataGridView1.CancelEdit();
+                    break;
+            }
         }
 
         private void dataGridView1_CurrentCellDirtyStateChanged(object sender, EventArgs e)
@@ -206,20 +226,20 @@ namespace CheckProcessApplication
             }
         }
 
-        private void btnCustom1_Click(object sender, EventArgs e)
+        private void btnDelete_Click(object sender, EventArgs e)
         {
-            var dt = ((DataTable)dataGridView1.DataSource).Clone();
-            var dv = new DataView((DataTable)dataGridView1.DataSource);
-            dv.RowFilter = "Selected = true";
-            foreach (DataRow dataRow in dv.ToTable().Rows)
-            {
-                var drNew = dt.NewRow();
-                drNew.ItemArray = dataRow.ItemArray;
-                dt.Rows.Add(drNew);
-            }
+            //var dt = ((DataTable)dataGridView1.DataSource).Clone();
+            //var dv = new DataView((DataTable)dataGridView1.DataSource);
+            //dv.RowFilter = "Selected = true";
+            //foreach (DataRow dataRow in dv.ToTable().Rows)
+            //{
+            //    var drNew = dt.NewRow();
+            //    drNew.ItemArray = dataRow.ItemArray;
+            //    dt.Rows.Add(drNew);
+            //}
 
             var i = 0;
-            foreach (DataRow dr in dt.Rows)
+            foreach (DataRow dr in dtPrint.Rows)
             {
                 var cmd = Center.cmd;
                 string sql = $"DELETE FROM PrintStatus WHERE ID = {dr[cID.DataPropertyName]}";
@@ -249,19 +269,19 @@ namespace CheckProcessApplication
                 //var newRow = ListPrint.NewRow();
                 var newRow = ((DataRowView)(dataGridView1.CurrentRow.DataBoundItem)).Row;
                 newRow["Selected"] = false;
-                ListPrint.ImportRow(newRow);
+                dtPrint.ImportRow(newRow);
                 //ListPrint.Rows.Add(newRow);
             }
             else
             {
                 bool areEqual = false;
-                foreach (DataRow dataRow in ListPrint.Rows)
+                foreach (DataRow dataRow in dtPrint.Rows)
                 {
                     areEqual = dataRow.ItemArray.SequenceEqual(((DataRowView)(dataGridView1.CurrentRow.DataBoundItem)).Row.ItemArray);
                     if (areEqual)
                         dataRow.Delete();
                 }
-                ListPrint.AcceptChanges();
+                dtPrint.AcceptChanges();
             }
         }
     }

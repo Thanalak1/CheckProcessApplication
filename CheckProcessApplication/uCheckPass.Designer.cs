@@ -52,12 +52,12 @@
             this.cpass_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.btnCustom1 = new CheckProcessApplication.CustomTools.BtnCustom();
             this.btnDelete = new CheckProcessApplication.CustomTools.BtnCustom();
             this.btnCustom2 = new CheckProcessApplication.CustomTools.BtnCustom();
             this.txtOrderNo = new CheckProcessApplication.CustomTools.TextBoxCustom();
             this.previewBtn = new CheckProcessApplication.CustomTools.BtnCustom();
             this.txtEmpCode = new CheckProcessApplication.CustomTools.TextBoxCustom();
-            this.btnCustom1 = new CheckProcessApplication.CustomTools.BtnCustom();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -188,7 +188,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(1017, 446);
             this.dataGridView1.TabIndex = 28;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
-            this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
             this.dataGridView1.CurrentCellDirtyStateChanged += new System.EventHandler(this.dataGridView1_CurrentCellDirtyStateChanged);
             // 
             // cSelected
@@ -290,6 +289,22 @@
             this.checkBox1.Text = "เฉพาะบิลที่ยังไม่ปริ้น";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
+            // btnCustom1
+            // 
+            this.btnCustom1.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnCustom1.BorderRadius = 0;
+            this.btnCustom1.BorderSize = 0;
+            this.btnCustom1.FlatAppearance.BorderSize = 0;
+            this.btnCustom1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCustom1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.btnCustom1.ForeColor = System.Drawing.Color.White;
+            this.btnCustom1.Location = new System.Drawing.Point(748, 165);
+            this.btnCustom1.Name = "btnCustom1";
+            this.btnCustom1.Size = new System.Drawing.Size(177, 40);
+            this.btnCustom1.TabIndex = 33;
+            this.btnCustom1.Text = "List Print";
+            this.btnCustom1.UseVisualStyleBackColor = false;
+            // 
             // btnDelete
             // 
             this.btnDelete.BackColor = System.Drawing.Color.RoyalBlue;
@@ -306,7 +321,7 @@
             this.btnDelete.TabIndex = 32;
             this.btnDelete.Text = "แก้ไขสถานะ";
             this.btnDelete.UseVisualStyleBackColor = false;
-            this.btnDelete.Click += new System.EventHandler(this.btnCustom1_Click);
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnCustom2
             // 
@@ -378,23 +393,6 @@
             this.txtEmpCode.TabIndex = 13;
             this.txtEmpCode.Texts = "";
             this.txtEmpCode.UnderLineStyle = false;
-            // 
-            // btnCustom1
-            // 
-            this.btnCustom1.BackColor = System.Drawing.Color.RoyalBlue;
-            this.btnCustom1.BorderRadius = 0;
-            this.btnCustom1.BorderSize = 0;
-            this.btnCustom1.FlatAppearance.BorderSize = 0;
-            this.btnCustom1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCustom1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.btnCustom1.ForeColor = System.Drawing.Color.White;
-            this.btnCustom1.Location = new System.Drawing.Point(748, 165);
-            this.btnCustom1.Name = "btnCustom1";
-            this.btnCustom1.Size = new System.Drawing.Size(177, 40);
-            this.btnCustom1.TabIndex = 33;
-            this.btnCustom1.Text = "List Print";
-            this.btnCustom1.UseVisualStyleBackColor = false;
-            this.btnCustom1.Click += new System.EventHandler(this.btnCustom1_Click_1);
             // 
             // uCheckPass
             // 
