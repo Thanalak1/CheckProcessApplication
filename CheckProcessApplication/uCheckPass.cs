@@ -37,7 +37,7 @@ namespace CheckProcessApplication
 
         }
 
-        private DataTable dtPrint
+        public DataTable dtPrint
         {
             get
             {

@@ -85,6 +85,9 @@ namespace CheckProcessApplication
                     cmd.Connection.Open();
                 i = cmd.ExecuteNonQuery();
             }
+
+            uCheckPass uCheckPass = new uCheckPass();
+            uCheckPass.dtPrint.Clear();
         }
 
         private void SelectedForm_Load(object sender, EventArgs e)
