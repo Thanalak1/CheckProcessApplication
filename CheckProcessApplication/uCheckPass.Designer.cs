@@ -52,6 +52,7 @@
             this.cpass_ok = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cpass_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chkAll = new System.Windows.Forms.CheckBox();
             this.btnCustom1 = new CheckProcessApplication.CustomTools.BtnCustom();
             this.btnDelete = new CheckProcessApplication.CustomTools.BtnCustom();
             this.btnCustom2 = new CheckProcessApplication.CustomTools.BtnCustom();
@@ -304,6 +305,17 @@
             this.cID.ReadOnly = true;
             this.cID.Visible = false;
             // 
+            // chkAll
+            // 
+            this.chkAll.AutoSize = true;
+            this.chkAll.Location = new System.Drawing.Point(17, 663);
+            this.chkAll.Name = "chkAll";
+            this.chkAll.Size = new System.Drawing.Size(83, 17);
+            this.chkAll.TabIndex = 34;
+            this.chkAll.Text = "เลือกทั้งหมด";
+            this.chkAll.UseVisualStyleBackColor = true;
+            this.chkAll.CheckedChanged += new System.EventHandler(this.chkAll_CheckedChanged);
+            // 
             // btnCustom1
             // 
             this.btnCustom1.BackColor = System.Drawing.Color.RoyalBlue;
@@ -416,6 +428,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(1045, 715);
+            this.Controls.Add(this.chkAll);
             this.Controls.Add(this.btnCustom1);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnCustom2);
@@ -476,5 +489,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cpass_ok;
         private System.Windows.Forms.DataGridViewTextBoxColumn cpass_date;
         private System.Windows.Forms.DataGridViewTextBoxColumn cID;
+        private System.Windows.Forms.CheckBox chkAll;
     }
 }
