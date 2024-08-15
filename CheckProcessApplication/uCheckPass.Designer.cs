@@ -196,7 +196,7 @@
             this.cSelected.DataPropertyName = "Selected";
             this.cSelected.HeaderText = "เลือกรายการ";
             this.cSelected.Name = "cSelected";
-            this.cSelected.Width = 73;
+            this.cSelected.Width = 66;
             // 
             // cJobBarcode
             // 
@@ -204,7 +204,7 @@
             this.cJobBarcode.DataPropertyName = "JobBarcode";
             this.cJobBarcode.HeaderText = "รหัสรับงานช่าง";
             this.cJobBarcode.Name = "cJobBarcode";
-            this.cJobBarcode.Width = 99;
+            this.cJobBarcode.Width = 76;
             // 
             // cBillNo
             // 
@@ -298,12 +298,13 @@
             this.btnCustom1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCustom1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.btnCustom1.ForeColor = System.Drawing.Color.White;
-            this.btnCustom1.Location = new System.Drawing.Point(748, 165);
+            this.btnCustom1.Location = new System.Drawing.Point(856, 165);
             this.btnCustom1.Name = "btnCustom1";
             this.btnCustom1.Size = new System.Drawing.Size(177, 40);
             this.btnCustom1.TabIndex = 33;
             this.btnCustom1.Text = "List Print";
             this.btnCustom1.UseVisualStyleBackColor = false;
+            this.btnCustom1.Click += new System.EventHandler(this.btnCustom1_Click);
             // 
             // btnDelete
             // 
@@ -315,7 +316,7 @@
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.btnDelete.ForeColor = System.Drawing.Color.White;
-            this.btnDelete.Location = new System.Drawing.Point(758, 663);
+            this.btnDelete.Location = new System.Drawing.Point(897, 663);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(136, 40);
             this.btnDelete.TabIndex = 32;
@@ -368,7 +369,7 @@
             this.previewBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.previewBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.previewBtn.ForeColor = System.Drawing.Color.White;
-            this.previewBtn.Location = new System.Drawing.Point(900, 663);
+            this.previewBtn.Location = new System.Drawing.Point(758, 663);
             this.previewBtn.Name = "previewBtn";
             this.previewBtn.Size = new System.Drawing.Size(133, 40);
             this.previewBtn.TabIndex = 15;

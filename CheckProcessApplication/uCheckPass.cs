@@ -17,6 +17,7 @@ namespace CheckProcessApplication
         public uCheckPass()
         {
             InitializeComponent();
+            previewBtn.Visible = false;
         }
 
         private void CloseBtn_Click(object sender, EventArgs e)
@@ -283,6 +284,12 @@ namespace CheckProcessApplication
                 }
                 dtPrint.AcceptChanges();
             }
+        }
+
+        private void btnCustom1_Click(object sender, EventArgs e)
+        {
+            SelectedForm form = new SelectedForm(dtPrint);
+            form.Show();
         }
     }
 }

@@ -353,6 +353,12 @@
       <DependentUpon>CrystalReport2.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="SelectedForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectedForm.Designer.cs">
+      <DependentUpon>SelectedForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="uCheckPass.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -461,6 +467,9 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CrystalReport2.cs</LastGenOutput>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectedForm.resx">
+      <DependentUpon>SelectedForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="uCheckPass.resx">
       <DependentUpon>uCheckPass.cs</DependentUpon>
