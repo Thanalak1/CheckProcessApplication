@@ -69,6 +69,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SelectedForm";
             this.Text = "รายการที่เลือก";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SelectedForm_FormClosed);
             this.Load += new System.EventHandler(this.SelectedForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.ResumeLayout(false);

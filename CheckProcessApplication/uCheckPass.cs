@@ -211,7 +211,7 @@ namespace CheckProcessApplication
         private void btnDelete_Click(object sender, EventArgs e)
         {
             var i = 0;
-            foreach (DataRow dr in dtPrint.Rows)
+            foreach (DataRow dr in ((DataTable)dataGridView1.DataSource).Rows)
             {
                 var cmd = Center.cmd;
                 string sql = $"DELETE FROM PrintStatus WHERE ID = {dr[cID.DataPropertyName]}";
@@ -233,7 +233,10 @@ namespace CheckProcessApplication
         private void btnCustom1_Click(object sender, EventArgs e)
         {
             SelectedForm form = new SelectedForm(dtPrint);
-            form.Show();
+            if (form.ShowDialog() != DialogResult.OK) return;
+
+            dtPrint.Clear();
+            chkAll_CheckedChanged(null, null);
         }
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)

@@ -86,8 +86,8 @@ namespace CheckProcessApplication
                 i = cmd.ExecuteNonQuery();
             }
 
-            uCheckPass uCheckPass = new uCheckPass();
-            uCheckPass.dtPrint.Clear();
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
 
         private void SelectedForm_Load(object sender, EventArgs e)
@@ -149,6 +149,10 @@ namespace CheckProcessApplication
             }
 
             return dataTable;
+        }
+
+        private void SelectedForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
         }
     }
 }
