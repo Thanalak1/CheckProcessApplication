@@ -62,7 +62,7 @@ namespace CheckProcessApplication
             {
                 text += $"{fSpacing}{item.JobName.Trim()} จำนวน {item.Count} บิล";
                 fSpacing = "  |  ";
-                Console.WriteLine($"{item.JobName}, จำนวนครั้งที่ปรากฏ: {item.Count}");
+                //Console.WriteLine($"{item.JobName}, จำนวนครั้งที่ปรากฏ: {item.Count}");
             }
 
             // - Print
@@ -76,7 +76,7 @@ namespace CheckProcessApplication
             System.IO.File.Delete(xsdFile);
 
             var i = 0;
-            foreach (DataRow dr in dt.Rows)
+            foreach (DataRow dr in dtPrint.Rows)
             {
                 var cmd = Center.cmd;
                 string sql = $"INSERT INTO PrintStatus (JobBarcode, DocNo, EmpCode, IsPrint) VALUES('{dr["JobBarcode"]}', '{dr["DocNo"]}', '{dr["EmpCode"]}', 1)";
@@ -106,7 +106,7 @@ namespace CheckProcessApplication
 
             foreach (DataGridViewColumn col in dgv.Columns)
             {
-                Console.WriteLine(col.Name);
+                //Console.WriteLine(col.Name);
             }
 
             dgv.Columns["ID"].Visible = false;
