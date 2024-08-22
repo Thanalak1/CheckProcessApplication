@@ -39,11 +39,24 @@ namespace CheckProcessApplication
             string WHEREDAT = "";
             var DTP = dtpInput.Value.Date;
             var currentDate = DateTime.Today;
+            
             if (DTP != currentDate)
             {
                 WHEREDAT = $"WHERE JobHead.JobDate = '{DTP:yyyy-MM-dd}'";
             }
-
+            var SRATE = SrateInput.Texts.Trim();
+            if (string.IsNullOrEmpty(SRATE))
+            {
+                SRATE = "37";
+            }
+            else
+            {
+                if (!decimal.TryParse(SRATE, out _))
+                {
+                    MessageBox.Show("กรุณากรอกเฉพาะตัวเลขเท่านั้น", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
             Center.cmd.CommandText = $@"--select * from V_PolishAndBathe {WHERE} order by DocNo, JobBarcode
                                         WITH RankedData AS
                                         (SELECT AccEmp.EmpCode, JobHead.EmpName, AccEmp.Inv_No, AccEmp.DocNo, AccEmp2.JobBarCode, JobHead.JobDate,
@@ -70,8 +83,8 @@ namespace CheckProcessApplication
                                         CAST((SUM(ISNULL(AccEmp2.OKWG, 0) + ISNULL(V_JobMaterial_NoSum.MatRecWg, 0) + ISNULL(JobBills.RtWg, 0) + ISNULL(JobBills.Silver, 0) + (FLOOR((((ISNULL(AccEmp2.OKWG, 0) - (ISNULL(JobDetail.MatWg, 0) + ISNULL(JobDetail.MatWg2, 0))) * ISNULL(JobDetail.DMPercent, 0)) / 100) * 100) / 100)) OVER () - SUM(ISNULL(JobDetail.TtlWg, 0) + ISNULL(JobDetail.MatWg, 0) + ISNULL(JobDetail.MatWg2, 0)) OVER ()) AS DECIMAL(18, 2)) AS DiffTTWg,
                                         CAST(((CAST(SUM(ISNULL(AccEmp2.OKWG, 0) + ISNULL(V_JobMaterial_NoSum.MatRecWg, 0) + ISNULL(JobBills.RtWg, 0) + ISNULL(JobBills.Silver, 0) + FLOOR(((ISNULL(AccEmp2.OKWG, 0) - (ISNULL(JobDetail.MatWg, 0) + ISNULL(JobDetail.MatWg2, 0))) * ISNULL(JobDetail.DMPercent, 0) / 100) * 100 / 100)) OVER () - (SUM(ISNULL(JobDetail.TtlWg, 0) + ISNULL(JobDetail.MatWg, 0) + ISNULL(JobDetail.MatWg2, 0)) OVER ()) AS DECIMAL(18, 2))) / NULLIF(SUM(ISNULL(JobDetail.TtlWg, 0) + ISNULL(JobDetail.MatWg, 0) + ISNULL(JobDetail.MatWg2, 0)) OVER (), 0) * 100) AS DECIMAL(5, 2)) AS PerDiffTTWg,
 
-                                        --CAST(SUM((JobDetail.PriceJob * FLOOR(AccEmp2.OKQty)) - (AccEmp.DMWG + AccEmp.LSWG + AccEmp.DMGemAmount + AccEmp.LSGemAmount + AccEmp.DeductAmount) - CASE WHEN ROUND(CAST((ISNULL(JobDetail.MatWg, 0) + ISNULL(JobDetail.MatWg2, 0)) / NULLIF(ISNULL(JobDetail.TtQty, 0), 0) - (ISNULL(JobDetail.MatWg, 0) + ISNULL(JobDetail.MatWg2, 0) - ISNULL(V_JobMaterial_NoSum.MatRecWg, 0)) AS DECIMAL(18, 0)), 0) > 0 THEN (CAST((ISNULL(JobDetail.MatWg, 0) + ISNULL(JobDetail.MatWg2, 0)) / NULLIF(ISNULL(JobDetail.TtQty, 0), 0) - (ISNULL(JobDetail.MatWg, 0) + ISNULL(JobDetail.MatWg2, 0) - ISNULL(V_JobMaterial_NoSum.MatRecWg, 0)) AS DECIMAL(18, 4)) * 37) ELSE 0 END ) OVER() AS DECIMAL(18, 2)) AS NetWage
-                                        CAST(SUM((JobDetail.PriceJob * FLOOR(AccEmp2.OKQty)) - (AccEmp.DMWG + AccEmp.LSWG + AccEmp.DMGemAmount + AccEmp.LSGemAmount + AccEmp.DeductAmount) - CASE WHEN CAST((ISNULL(JobDetail.MatWg, 0) + ISNULL(JobDetail.MatWg2, 0)) / NULLIF(ISNULL(JobDetail.TtQty, 0), 0) - (ISNULL(JobDetail.MatWg, 0) + ISNULL(JobDetail.MatWg2, 0) - ISNULL(V_JobMaterial_NoSum.MatRecWg, 0)) AS DECIMAL(18, 4)) > 0 THEN (CAST((ISNULL(JobDetail.MatWg, 0) + ISNULL(JobDetail.MatWg2, 0)) / NULLIF(ISNULL(JobDetail.TtQty, 0), 0) - (ISNULL(JobDetail.MatWg, 0) + ISNULL(JobDetail.MatWg2, 0) - ISNULL(V_JobMaterial_NoSum.MatRecWg, 0)) AS DECIMAL(18, 4)) * 37) ELSE 0 END ) OVER() AS DECIMAL(18, 2)) AS NetWage
+                                        --CAST(SUM((JobDetail.PriceJob * FLOOR(AccEmp2.OKQty)) - (AccEmp.DMWG + AccEmp.LSWG + AccEmp.DMGemAmount + AccEmp.LSGemAmount + AccEmp.DeductAmount) - CASE WHEN ROUND(CAST((ISNULL(JobDetail.MatWg, 0) + ISNULL(JobDetail.MatWg2, 0)) / NULLIF(ISNULL(JobDetail.TtQty, 0), 0) - (ISNULL(JobDetail.MatWg, 0) + ISNULL(JobDetail.MatWg2, 0) - ISNULL(V_JobMaterial_NoSum.MatRecWg, 0)) AS DECIMAL(18, 0)), 0) > 0 THEN (CAST((ISNULL(JobDetail.MatWg, 0) + ISNULL(JobDetail.MatWg2, 0)) / NULLIF(ISNULL(JobDetail.TtQty, 0), 0) - (ISNULL(JobDetail.MatWg, 0) + ISNULL(JobDetail.MatWg2, 0) - ISNULL(V_JobMaterial_NoSum.MatRecWg, 0)) AS DECIMAL(18, 4)) * {SRATE}) ELSE 0 END ) OVER() AS DECIMAL(18, 2)) AS NetWage
+                                        CAST(SUM((JobDetail.PriceJob * FLOOR(AccEmp2.OKQty)) - (AccEmp.DMWG + AccEmp.LSWG + AccEmp.DMGemAmount + AccEmp.LSGemAmount + AccEmp.DeductAmount) - CASE WHEN CAST((ISNULL(JobDetail.MatWg, 0) + ISNULL(JobDetail.MatWg2, 0)) / NULLIF(ISNULL(JobDetail.TtQty, 0), 0) - (ISNULL(JobDetail.MatWg, 0) + ISNULL(JobDetail.MatWg2, 0) - ISNULL(V_JobMaterial_NoSum.MatRecWg, 0)) AS DECIMAL(18, 4)) > 0 THEN (CAST((ISNULL(JobDetail.MatWg, 0) + ISNULL(JobDetail.MatWg2, 0)) / NULLIF(ISNULL(JobDetail.TtQty, 0), 0) - (ISNULL(JobDetail.MatWg, 0) + ISNULL(JobDetail.MatWg2, 0) - ISNULL(V_JobMaterial_NoSum.MatRecWg, 0)) AS DECIMAL(18, 4)) * {SRATE}) ELSE 0 END ) OVER() AS DECIMAL(18, 2)) AS NetWage
 
                                         FROM (SELECT * FROM AccEmp {WHERE}) AS AccEmp
                                         LEFT JOIN AccEmp2 ON AccEmp.DocNo = AccEmp2.DocNo AND AccEmp.EmpCode = AccEmp2.EmpCode

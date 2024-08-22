@@ -33,7 +33,7 @@
             this.dtpInput = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBoxCustom1 = new CheckProcessApplication.CustomTools.TextBoxCustom();
+            this.SrateInput = new CheckProcessApplication.CustomTools.TextBoxCustom();
             this.CloseBtn = new CheckProcessApplication.CustomTools.BtnCustom();
             this.previewBtn = new CheckProcessApplication.CustomTools.BtnCustom();
             this.invInput = new CheckProcessApplication.CustomTools.TextBoxCustom();
@@ -86,23 +86,23 @@
             this.label4.TabIndex = 8;
             this.label4.Text = "Rate เนื้อเงิน";
             // 
-            // textBoxCustom1
+            // SrateInput
             // 
-            this.textBoxCustom1.BackColor = System.Drawing.SystemColors.Window;
-            this.textBoxCustom1.BorderColor = System.Drawing.Color.LightPink;
-            this.textBoxCustom1.BorderFocusColor = System.Drawing.Color.HotPink;
-            this.textBoxCustom1.BorderRadius = 0;
-            this.textBoxCustom1.BorderSize = 2;
-            this.textBoxCustom1.Location = new System.Drawing.Point(114, 336);
-            this.textBoxCustom1.Multiline = true;
-            this.textBoxCustom1.Name = "textBoxCustom1";
-            this.textBoxCustom1.PasswordChar = false;
-            this.textBoxCustom1.PlaceholderColor = System.Drawing.Color.DarkGray;
-            this.textBoxCustom1.PlaceholderText = "";
-            this.textBoxCustom1.Size = new System.Drawing.Size(250, 30);
-            this.textBoxCustom1.TabIndex = 7;
-            this.textBoxCustom1.Texts = "";
-            this.textBoxCustom1.UnderLineStyle = false;
+            this.SrateInput.BackColor = System.Drawing.SystemColors.Window;
+            this.SrateInput.BorderColor = System.Drawing.Color.LightPink;
+            this.SrateInput.BorderFocusColor = System.Drawing.Color.HotPink;
+            this.SrateInput.BorderRadius = 0;
+            this.SrateInput.BorderSize = 2;
+            this.SrateInput.Location = new System.Drawing.Point(114, 336);
+            this.SrateInput.Multiline = true;
+            this.SrateInput.Name = "SrateInput";
+            this.SrateInput.PasswordChar = false;
+            this.SrateInput.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.SrateInput.PlaceholderText = "";
+            this.SrateInput.Size = new System.Drawing.Size(250, 30);
+            this.SrateInput.TabIndex = 7;
+            this.SrateInput.Texts = "";
+            this.SrateInput.UnderLineStyle = false;
             // 
             // CloseBtn
             // 
@@ -163,7 +163,7 @@
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(695, 476);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBoxCustom1);
+            this.Controls.Add(this.SrateInput);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dtpInput);
             this.Controls.Add(this.CloseBtn);
@@ -187,7 +187,7 @@
         private CustomTools.BtnCustom CloseBtn;
         private System.Windows.Forms.DateTimePicker dtpInput;
         private System.Windows.Forms.Label label3;
-        private CustomTools.TextBoxCustom textBoxCustom1;
+        private CustomTools.TextBoxCustom SrateInput;
         private System.Windows.Forms.Label label4;
     }
 }
