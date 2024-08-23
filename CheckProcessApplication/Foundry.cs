@@ -42,7 +42,7 @@ namespace CheckProcessApplication
                 $", CASE WHEN DATEDIFF(DAY, DATEADD(DAY, CASE WHEN JobDetail.DMPercent != 0 THEN 9 ELSE 0 END, DATEADD(DAY, (CASE WHEN JobDetail.ChkModel = 1 AND JobDetail.Model > 0 THEN 12 ELSE 9 END), JobHead.JobDate)), JobKeeps.mdate) > 1 THEN 'YES' ELSE '' END AS Late" +
                 $", CASE WHEN ISNULL(JobKeeps.TtQty, 0) > (ISNULL(JobDetail.TtQty, 0) * 70) / 100 THEN '' ELSE 'YES' END AS TtQy" +
                 $", ISNULL(JobDetail.PriceJob, 0) AS PriceJob, ISNULL(AccEmp2.OKQty, 0) AS OKQty" +
-                $", CASE WHEN ISNULL(JobDetail.PriceJob, 0) > ISNULL(JobCost.Cost1, 0) THEN 'ไม่ถูกต้อง' ELSE '' END AS JobCenter" +
+                $", CASE WHEN ISNULL(JobDetail.PriceJob, 0) > ISNULL(JobCost_DetailJob.JobPrice, 0) THEN 'ไม่ถูกต้อง' ELSE '' END AS JobCenter" +
                 $", CASE WHEN ISNULL(AccEmp.EmpAmount, 0) + ISNULL(AccEmp.ISAAmount, 0) <> (ISNULL(JobDetail.PriceJob, 0) * FLOOR(ISNULL(AccEmp2.OKQty, 0)) - (ISNULL(AccEmp.DMWG, 0) + ISNULL(AccEmp.LSWG, 0) + ISNULL(AccEmp.DMGemAmount, 0))) + (ISNULL(Emps.qtys, 0) * ModelNewP) + (FLOOR(ISNULL(AccEmp.OKQty, 0) - ISNULL(AccEmp2.OKQty,0))) * ISNULL(JobDetail.PriceJob, 0) THEN 'ค่าแรงไม่ถูกต้อง' ELSE '' END AS Wage" +
                 $", CEILING(CASE WHEN ISNULL(Jobmodel_purchase.qty, 0) <> 0 THEN ISNULL(Jobmodel_purchase.qty, 0) - (ISNULL(AccEmp.OKQTY, 0) / {value}) ELSE 0 END) AS DIFFQty, 0 AS DIFF2" +
                 $", CASE WHEN ISNULL(Jobmodel_purchase.qty, 0) = 0 THEN 0 ELSE CASE WHEN ISNULL(AccEmp.ModelNewQ, 0) + ISNULL(AccEmp.ModelNewQ2, 0) + ISNULL(AccEmp.ModelNewQ3, 0) >= ISNULL(Jobmodel_purchase.qty, 0) THEN CASE WHEN ISNULL(Jobmodel_purchase.qty, 0) <= CEILING(ISNULL(AccEmp.OKQTY, 0) / {value}) THEN ISNULL(Jobmodel_purchase.qty, 0) ELSE CEILING(ISNULL(AccEmp.OKQTY, 0) / {value}) END ELSE CASE WHEN ISNULL(Jobmodel_purchase.qty, 0) <= CEILING(ISNULL(AccEmp.OKQTY, 0) / {value}) THEN ISNULL(AccEmp.ModelNewQ, 0) + ISNULL(AccEmp.ModelNewQ2, 0) + ISNULL(AccEmp.ModelNewQ3, 0) ELSE CEILING(ISNULL(AccEmp.OKQTY, 0) / {value}) END END END AS DIFFOrder" +
@@ -62,7 +62,7 @@ namespace CheckProcessApplication
                 $" LEFT JOIN JobDetail ON AccEmp.DocNo = JobDetail.DocNo AND AccEmp.EmpCode = JobDetail.EmpCode AND AccEmp2.JobBarCode = JobDetail.JobBarcode" +
                 $" LEFT JOIN CProfile ON JobDetail.Article = CProfile.Article AND JobDetail.ArtCode = CProfile.ArtCode" +
                 $" LEFT JOIN (SELECT DocNo, EmpCode, JobBarcode, mdate, TtQty FROM JobKeep WHERE Num = '01') AS JobKeeps ON AccEmp.DocNo = JobKeeps.DocNo AND AccEmp.EmpCode = JobKeeps.EmpCode AND AccEmp2.JobBarCode = JobKeeps.JobBarcode" +
-                $" LEFT JOIN JobCost ON JobDetail.OrderNo = JobCost.Orderno AND JobDetail.LotNo = JobCost.LotNo" +
+                $" LEFT JOIN JobCost_DetailJob ON AccEmp2.JobBarCode = JobCost_DetailJob.JobBarcode" +
                 $" LEFT JOIN Jobmodel_purchase ON AccEmp2.JobBarCode = Jobmodel_purchase.Jobbarcode" +
                 $" LEFT JOIN V_JobModel_Sum ON AccEmp.DocNo = V_JobModel_Sum.DocNo AND AccEmp.EmpCode = V_JobModel_Sum.EmpCode" +
                 $" LEFT JOIN V_JobMaterial_Sum ON AccEmp.DocNo = V_JobMaterial_Sum.DocNo AND AccEmp.EmpCode = V_JobMaterial_Sum.EmpCode" +
