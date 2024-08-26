@@ -16,14 +16,14 @@ namespace CheckProcessApplication.Reports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class PolishCrystalReport : ReportClass {
+    public class BatheAndPolishReport : ReportClass {
         
-        public PolishCrystalReport() {
+        public BatheAndPolishReport() {
         }
         
         public override string ResourceName {
             get {
-                return "PolishCrystalReport.rpt";
+                return "BatheAndPolishReport.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace CheckProcessApplication.Reports {
         
         public override string FullResourceName {
             get {
-                return "CheckProcessApplication.Reports.PolishCrystalReport.rpt";
+                return "CheckProcessApplication.Reports.BatheAndPolishReport.rpt";
             }
             set {
                 // Do nothing
@@ -98,9 +98,9 @@ namespace CheckProcessApplication.Reports {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedPolishCrystalReport : Component, ICachedReport {
+    public class CachedBatheAndPolishReport : Component, ICachedReport {
         
-        public CachedPolishCrystalReport() {
+        public CachedBatheAndPolishReport() {
         }
         
         [Browsable(false)]
@@ -137,7 +137,7 @@ namespace CheckProcessApplication.Reports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            PolishCrystalReport rpt = new PolishCrystalReport();
+            BatheAndPolishReport rpt = new BatheAndPolishReport();
             rpt.Site = this.Site;
             return rpt;
         }

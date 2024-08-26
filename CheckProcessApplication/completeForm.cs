@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormsApp2;
 
 namespace CheckProcessApplication
 {
@@ -19,6 +21,17 @@ namespace CheckProcessApplication
             InitializeComponent();
         }
 
+        ReportDocument cReport;
+        protected string xsdFile
+        {
+            get
+            {
+                var s = cReport.FileName.Replace(".rpt", ".xsd");
+                return s.Replace("rassdk://", "");
+            }
+
+        }
+
         private void CloseBtn_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -26,25 +39,30 @@ namespace CheckProcessApplication
 
         private void previewBtn_Click(object sender, EventArgs e)
         {
-            String inv = InvInput.Texts;
-            String sqlQuery = "select * from V_Complete where Inv_No = '" + inv + "' order by DocNo asc, JobBarCode asc;";
+            if (string.IsNullOrEmpty(InvInput.Texts)) { return; }
+            var WHERE = $"WHERE Inv_No = '{InvInput.Texts}'";
+            Center.cmd.CommandText = $"select * from V_Complete {WHERE} order by DocNo, JobBarcode";
 
-            PreviewComplete previewComplete = new PreviewComplete();
-            CompleteReport reports = new CompleteReport();
+            var dt = Center.Load();
+            if (dt.Rows.Count == 0)
+            {
+                MessageBox.Show($"ไม่พบข้อมูล Inv. {InvInput.Texts}", "ERROR!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-            SqlCommand comm = new SqlCommand(sqlQuery, conn);
-            SqlDataAdapter adap = new SqlDataAdapter(comm);
+            cReport = new ReportDocument();
             DataSet ds = new DataSet();
-            adap.SelectCommand.CommandTimeout = 720;
-            adap.Fill(ds, "V_Complete");
-            reports.SetDataSource(ds);
+            if (!ds.Tables.Contains(dt.TableName))
+                ds.Tables.Add(dt.Copy());
 
-            reports.SetDatabaseLogon("admin", "jp", "server", "PrincessData");
-            reports.VerifyDatabase();
-            previewComplete.crystalReportViewer1.ReportSource = reports;
-            previewComplete.crystalReportViewer1.Refresh();
-            previewComplete.Show();
-            conn.Close();
+            cReport.Load($"D:\\Best_Project\\JPM-Check-Job\\CheckProcessApplication\\Reports\\CompleteReport.rpt");
+            ds.WriteXmlSchema(xsdFile);
+            cReport.SetDataSource(dt);
+            var u = new uReportViewer(cReport);
+            u.WindowState = FormWindowState.Maximized;
+            u.Show();
+
+            System.IO.File.Delete(xsdFile);
         }
     }
 }

@@ -316,11 +316,17 @@
       <DependentUpon>CrystalReport2.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\PolishCrystalReport.cs">
+    <Compile Include="Reports\BatheAndPolishReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BatheAndPolishReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\PolishReport.cs">
       <SubType>Component</SubType>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PolishCrystalReport.rpt</DependentUpon>
+      <DependentUpon>PolishReport.rpt</DependentUpon>
     </Compile>
     <Compile Include="uCheckPass.cs">
       <SubType>Form</SubType>
@@ -431,9 +437,13 @@
       <LastGenOutput>CrystalReport2.cs</LastGenOutput>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\PolishCrystalReport.rpt">
+    <EmbeddedResource Include="Reports\BatheAndPolishReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>PolishCrystalReport.cs</LastGenOutput>
+      <LastGenOutput>BatheAndPolishReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\PolishReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PolishReport.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="uCheckPass.resx">
       <DependentUpon>uCheckPass.cs</DependentUpon>
