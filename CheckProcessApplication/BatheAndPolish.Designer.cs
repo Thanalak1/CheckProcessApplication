@@ -32,11 +32,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.dtpInput = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.SrateInput = new CheckProcessApplication.CustomTools.TextBoxCustom();
             this.CloseBtn = new CheckProcessApplication.CustomTools.BtnCustom();
             this.previewBtn = new CheckProcessApplication.CustomTools.BtnCustom();
             this.invInput = new CheckProcessApplication.CustomTools.TextBoxCustom();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -75,34 +74,6 @@
             this.label3.Size = new System.Drawing.Size(35, 26);
             this.label3.TabIndex = 6;
             this.label3.Text = "วันที่";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Angsana New", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.label4.Location = new System.Drawing.Point(32, 339);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(77, 26);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Rate เนื้อเงิน";
-            // 
-            // SrateInput
-            // 
-            this.SrateInput.BackColor = System.Drawing.SystemColors.Window;
-            this.SrateInput.BorderColor = System.Drawing.Color.LightPink;
-            this.SrateInput.BorderFocusColor = System.Drawing.Color.HotPink;
-            this.SrateInput.BorderRadius = 0;
-            this.SrateInput.BorderSize = 2;
-            this.SrateInput.Location = new System.Drawing.Point(114, 336);
-            this.SrateInput.Multiline = true;
-            this.SrateInput.Name = "SrateInput";
-            this.SrateInput.PasswordChar = false;
-            this.SrateInput.PlaceholderColor = System.Drawing.Color.DarkGray;
-            this.SrateInput.PlaceholderText = "";
-            this.SrateInput.Size = new System.Drawing.Size(250, 30);
-            this.SrateInput.TabIndex = 7;
-            this.SrateInput.Texts = "";
-            this.SrateInput.UnderLineStyle = false;
             // 
             // CloseBtn
             // 
@@ -156,14 +127,26 @@
             this.invInput.Texts = "";
             this.invInput.UnderLineStyle = false;
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.button1.Location = new System.Drawing.Point(536, 272);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(116, 40);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "Silver Rate";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // BatheAndPolish
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(695, 476);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.SrateInput);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dtpInput);
             this.Controls.Add(this.CloseBtn);
@@ -187,7 +170,6 @@
         private CustomTools.BtnCustom CloseBtn;
         private System.Windows.Forms.DateTimePicker dtpInput;
         private System.Windows.Forms.Label label3;
-        private CustomTools.TextBoxCustom SrateInput;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button button1;
     }
 }

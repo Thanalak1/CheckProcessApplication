@@ -182,6 +182,12 @@
       <DependentUpon>BuryReports.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CheckPWforEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CheckPWforEdit.Designer.cs">
+      <DependentUpon>CheckPWforEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Class\Center.cs" />
     <Compile Include="Class\AppSetting.cs" />
     <Compile Include="Class\Data.cs" />
@@ -328,6 +334,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PolishReport.rpt</DependentUpon>
     </Compile>
+    <Compile Include="SilverRateBnP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SilverRateBnP.Designer.cs">
+      <DependentUpon>SilverRateBnP.cs</DependentUpon>
+    </Compile>
     <Compile Include="uCheckPass.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -356,6 +368,9 @@
     <EmbeddedResource Include="BuryReports.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>BuryReports.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CheckPWforEdit.resx">
+      <DependentUpon>CheckPWforEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="completeForm.resx">
       <DependentUpon>completeForm.cs</DependentUpon>
@@ -444,6 +459,9 @@
     <EmbeddedResource Include="Reports\PolishReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>PolishReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SilverRateBnP.resx">
+      <DependentUpon>SilverRateBnP.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="uCheckPass.resx">
       <DependentUpon>uCheckPass.cs</DependentUpon>
