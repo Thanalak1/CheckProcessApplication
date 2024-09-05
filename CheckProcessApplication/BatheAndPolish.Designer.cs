@@ -35,7 +35,7 @@
             this.CloseBtn = new CheckProcessApplication.CustomTools.BtnCustom();
             this.previewBtn = new CheckProcessApplication.CustomTools.BtnCustom();
             this.invInput = new CheckProcessApplication.CustomTools.TextBoxCustom();
-            this.button1 = new System.Windows.Forms.Button();
+            this.silverbtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -60,7 +60,7 @@
             // 
             // dtpInput
             // 
-            this.dtpInput.Location = new System.Drawing.Point(114, 283);
+            this.dtpInput.Location = new System.Drawing.Point(103, 286);
             this.dtpInput.Name = "dtpInput";
             this.dtpInput.Size = new System.Drawing.Size(200, 20);
             this.dtpInput.TabIndex = 5;
@@ -71,9 +71,9 @@
             this.label3.Font = new System.Drawing.Font("Angsana New", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.label3.Location = new System.Drawing.Point(32, 283);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 26);
+            this.label3.Size = new System.Drawing.Size(54, 26);
             this.label3.TabIndex = 6;
-            this.label3.Text = "วันที่";
+            this.label3.Text = "วันที่จ่าย";
             // 
             // CloseBtn
             // 
@@ -127,18 +127,18 @@
             this.invInput.Texts = "";
             this.invInput.UnderLineStyle = false;
             // 
-            // button1
+            // silverbtn
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.button1.Location = new System.Drawing.Point(536, 272);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(116, 40);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Silver Rate";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.silverbtn.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.silverbtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.silverbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.silverbtn.Location = new System.Drawing.Point(536, 272);
+            this.silverbtn.Name = "silverbtn";
+            this.silverbtn.Size = new System.Drawing.Size(116, 40);
+            this.silverbtn.TabIndex = 9;
+            this.silverbtn.Text = "Silver Rate";
+            this.silverbtn.UseVisualStyleBackColor = false;
+            this.silverbtn.Click += new System.EventHandler(this.silverbtn_Click);
             // 
             // BatheAndPolish
             // 
@@ -146,7 +146,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(695, 476);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.silverbtn);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dtpInput);
             this.Controls.Add(this.CloseBtn);
@@ -170,6 +170,6 @@
         private CustomTools.BtnCustom CloseBtn;
         private System.Windows.Forms.DateTimePicker dtpInput;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button silverbtn;
     }
 }

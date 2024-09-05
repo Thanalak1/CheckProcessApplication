@@ -47,7 +47,8 @@ namespace CheckProcessApplication
                         {
                             DateTime lastDate = (DateTime)result;
                             DateTime now = DateTime.Now;
-                            if (lastDate.Year == now.Year && lastDate.Month == now.Month)
+                            int monthDifference = (now.Year - lastDate.Year) * 12 + now.Month - lastDate.Month;
+                            if (monthDifference == 0)
                             {
                                 CheckPWforEdit checkPWPopup = new CheckPWforEdit();
                                 checkPWPopup.StartPosition = FormStartPosition.CenterScreen;
@@ -60,13 +61,13 @@ namespace CheckProcessApplication
                                     MessageBox.Show("ยกเลิกการแก้ไข Silver Rate", "การยกเลิก", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 }
                             }
-                            else if (lastDate.Year == now.Year && lastDate.Month == now.Month - 1)
+                            else if (monthDifference >= 1)
                             {
                                 InsertSilverRate(SRATE);
                             }
-                            else if (lastDate.Year == now.Year && lastDate.Month == now.Month + 1)
+                            else if (monthDifference <= -1)
                             {
-                                MessageBox.Show("วันที่ปัจจุบันน้อยกว่าข้อมูลวันที่ล่าสุดในฐานข้อมูล", "แจ้งเตือน", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBox.Show("วันที่ปัจจุบันน้อยกว่าข้อมูลล่าสุดในฐานข้อมูล", "แจ้งเตือน", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             }
                         }
                         else
@@ -88,7 +89,6 @@ namespace CheckProcessApplication
         private void InsertSilverRate(string srate)
         {
             string insertQuery = "INSERT INTO SilverRate (SilverRate, cDate) VALUES (@SilverRate, GETDATE())";
-
             try
             {
                 SqlCommand insertCmd = new SqlCommand(insertQuery, con);
@@ -103,10 +103,7 @@ namespace CheckProcessApplication
         }
         private void UpdateSilverRate(string srate)
         {
-            string updateQuery = @"
-                                    UPDATE SilverRate
-                                    SET SilverRate = @SilverRate, mDate = GetDate()
-                                    WHERE cDate = (SELECT TOP 1 cDate FROM SilverRate ORDER BY cDate DESC)";
+            string updateQuery = @"UPDATE SilverRate SET SilverRate = @SilverRate, mDate = GetDate() WHERE cDate = (SELECT TOP 1 cDate FROM SilverRate ORDER BY cDate DESC)";
             try
             {
                 SqlCommand updateCmd = new SqlCommand(updateQuery, con);

@@ -34,12 +34,9 @@ namespace CheckProcessApplication
         }
         private void LoadSilverRate()
         {
-            string query = @"
-                                SELECT ISNULL(SilverRate, 0) AS SilverRate
-                                FROM SilverRate
-                                WHERE (MONTH(cDate) = MONTH(GETDATE()) AND YEAR(cDate) = YEAR(GETDATE()))
-                                   OR (MONTH(mDate) = MONTH(GETDATE()) AND YEAR(mDate) = YEAR(GETDATE()))
-                                ORDER BY cDate DESC, mDate DESC;";
+            string query = @"SELECT ISNULL(SilverRate, 0) AS SilverRate FROM SilverRate
+                            WHERE (MONTH(cDate) = MONTH(GETDATE()) AND YEAR(cDate) = YEAR(GETDATE())) OR (MONTH(mDate) = MONTH(GETDATE()) AND YEAR(mDate) = YEAR(GETDATE()))
+                            ORDER BY cDate DESC, mDate DESC;";
             try
             {
                 con.Open();
@@ -51,8 +48,7 @@ namespace CheckProcessApplication
                 }
                 else
                 {
-                    Center.cmd.CommandText = @"
-                                            SELECT TOP 1 Silver_Spot
+                    Center.cmd.CommandText = @"SELECT TOP 1 Silver_Spot
                                             FROM A1Rate_Sale
                                             ORDER BY Num DESC;";
                     var dt = Center.Load();
@@ -142,8 +138,7 @@ namespace CheckProcessApplication
             u.Show();
             System.IO.File.Delete(xsdFile);
         }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void silverbtn_Click(object sender, EventArgs e)
         {
             SilverRateBnP silverRatePopup = new SilverRateBnP();
             silverRatePopup.StartPosition = FormStartPosition.CenterScreen;
