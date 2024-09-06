@@ -95,6 +95,8 @@ namespace CheckProcessApplication
                 insertCmd.Parameters.AddWithValue("@SilverRate", srate);
                 insertCmd.ExecuteNonQuery();
                 MessageBox.Show("เพิ่มข้อมูลสำเร็จ", "แจ้งเตือน", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.DialogResult = DialogResult.OK;
+                this.Close();
             }
             catch (Exception ex)
             {
@@ -110,6 +112,7 @@ namespace CheckProcessApplication
                 updateCmd.Parameters.AddWithValue("@SilverRate", srate);
                 updateCmd.ExecuteNonQuery();
                 MessageBox.Show("แก้ไขข้อมูลสำเร็จ", "แจ้งเตือน", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             catch (Exception ex)

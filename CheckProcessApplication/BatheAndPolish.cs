@@ -15,8 +15,13 @@ namespace CheckProcessApplication
         public BatheAndPolish()
         {
             InitializeComponent();
+            UpdateSilverRateTextBox();
         }
-
+        public void UpdateSilverRateTextBox()
+        {
+            LoadSilverRate();
+            SratetxtBox.Texts = silverRate.ToString();
+        }
         private void CloseBtn_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -73,15 +78,7 @@ namespace CheckProcessApplication
             if (string.IsNullOrEmpty(invInput.Texts)) { return; }
             var WHERE = $"WHERE Inv_No = '{invInput.Texts.Trim()}'";
             var AND = $"AND Inv_No = '{invInput.Texts.Trim()}'";
-            string WHEREDATE = "";
-            var DTP = dtpInput.Value.Date;
-            var currentDate = DateTime.Today;
-            if (DTP != currentDate)
-            {
-                WHEREDATE = $"WHERE JobHead.JobDate = '{DTP:yyyy-MM-dd}'";
-            }
             LoadSilverRate();
-            MessageBox.Show($"silverRate = {silverRate}", "แจ้งเตือน", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Center.cmd.CommandText = $@"--select * from V_PolishAndBathe {WHERE} order by DocNo, JobBarcode
                                         WITH RankedData AS
                                         (SELECT AccEmp.EmpCode, JobHead.EmpName, AccEmp.Inv_No, AccEmp.DocNo, AccEmp2.JobBarCode, JobHead.JobDate,
@@ -115,14 +112,13 @@ namespace CheckProcessApplication
                                         LEFT JOIN (SELECT DocNo, EmpCode, Silver, SUM(OKTtl) AS OKTtl, SUM(RtWg) AS RtWg FROM JobBill GROUP BY DocNo, EmpCode, Silver) AS JobBills ON AccEmp.DocNo = JobBills.DocNo AND AccEmp.EmpCode = JobBills.EmpCode
                                         LEFT JOIN PSKTran2 ON JobDetail.OrderNo = PSKTran2.Orderno AND JobDetail.LotNo = PSKTran2.LotNo AND JobDetail.Barcode = PSKTran2.Barcode
                                         LEFT JOIN (SELECT DocNo, SUM(JobWg) as JobWg FROM JobGemDetail GROUP BY DocNo) AS JobGemDetail on JobGemDetail.DocNo = AccEmp.DocNo
-                                        {WHEREDATE}
 	                                    GROUP BY AccEmp.EmpCode, JobHead.EmpName, AccEmp.Inv_No, AccEmp.DocNo, AccEmp2.JobBarCode, JobHead.JobDate, LEFT(JobDetail.Article, 1), CProfile.TdesArt, JobHead.ChkReturn, JobHead.ChkAccount, JobDetail.PriceJob, AccEmp2.OKQty, AccEmp2.Accprice, JobCost.Cost3, AccEmp2.OKWG, V_JobMaterial_Sum.MatWg, V_JobMaterial_Sum.MatWg2, V_JobMaterial_NoSum.MatWg, V_JobMaterial_NoSum.MatWg2, V_JobMaterial_NoSum.MatRecWg, AccEmp.DMWG, AccEmp.LSWG, AccEmp.DMGemAmount, AccEmp.LSGemAmount, AccEmp.DeductAmount, AccEmp.EmpAmount, AccEmp.ISAAmount, AccEmp.ISSWG, JobDetail.Ttlwg, JobDetail.Matwg, JobDetail.Matwg2, JobBills.RtWg, JobBills.Silver, JobDetail.DMPercent, AccEmp2.DocNo, AccEmp2.EmpCode, JobDetail.TtQty, JobGemDetail.JobWg
-                                        ) 
+                                        )
                                         SELECT DENSE_RANK() OVER (ORDER BY DocNo) AS [ลำดับที่], EmpCode, EmpName, Inv_No, DocNo, JobBarCode, JobDate, TypeOfWork, TypeOfBill, Late, Less, LateFee, CenterAcc, DiffWgLoss, UnitLoss, DeductLost, DiffWg, Wage, DiffWg1, DiffMat1, DiffWg2, DiffMat2, DiffTTWg, PerDiffTTWg, NetWage FROM RankedData;";
             var dt = Center.Load();
             if (dt.Rows.Count == 0)
             {
-                MessageBox.Show($"ไม่พบข้อมูล Inv. {invInput.Texts} ,วันที่จ่าย {dtpInput.Value.Date.ToString("D")}", "ERROR!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"ไม่พบข้อมูล Inv. {invInput.Texts}", "ERROR!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             cReport = new ReportDocument();
@@ -140,9 +136,17 @@ namespace CheckProcessApplication
         }
         private void silverbtn_Click(object sender, EventArgs e)
         {
+            openSilverRateBnP();
+        }
+        private void openSilverRateBnP()
+        {
             SilverRateBnP silverRatePopup = new SilverRateBnP();
             silverRatePopup.StartPosition = FormStartPosition.CenterScreen;
-            silverRatePopup.Show();
+            if (silverRatePopup.ShowDialog() == DialogResult.OK)
+            {
+                LoadSilverRate();
+                SratetxtBox.Texts = silverRate.ToString();
+            }
         }
     }
 }
