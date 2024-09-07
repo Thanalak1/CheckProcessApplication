@@ -127,7 +127,7 @@ namespace CheckProcessApplication
             if (!ds.Tables.Contains(dt.TableName))
                 ds.Tables.Add(dt.Copy());
             //cReport.Load($"D:\\Best_Project\\JPM-Check-Job\\CheckProcessApplication\\Reports\\PolishAndBatheReport.rpt");
-            cReport.Load($"{Application.StartupPath}/Reports/BatheAndPolishReport.rpt");
+            cReport.Load($"\\factoryserver\\BillingScrip\\Reports\\BatheAndPolishReport.rpt");
             ds.WriteXmlSchema(xsdFile);
             cReport.SetDataSource(dt);
             var u = new uReportViewer(cReport);
