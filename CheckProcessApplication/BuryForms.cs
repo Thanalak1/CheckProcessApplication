@@ -50,7 +50,7 @@ namespace CheckProcessApplication
             if (!ds.Tables.Contains(dt.TableName))
                 ds.Tables.Add(dt.Copy());
 
-            cReport.Load($"{Application.StartupPath}/Reports/BuryReport2.rpt");
+            cReport.Load($"\\\\factoryserver\\BillingScrip\\Reports\\BuryReport.rpt");
             ds.WriteXmlSchema(xsdFile);
             cReport.SetDataSource(dt);
             var u = new uReportViewer(cReport);
