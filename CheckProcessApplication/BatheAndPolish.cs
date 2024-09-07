@@ -1,6 +1,8 @@
 ﻿using CrystalDecisions.CrystalReports.Engine;
 using System;
 using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
 using System.Windows.Forms;
 using WindowsFormsApp2;
 
@@ -8,11 +10,18 @@ namespace CheckProcessApplication
 {
     public partial class BatheAndPolish : Form
     {
+        private SqlConnection con = new SqlConnection("Data Source=SERVER;Initial Catalog=Best_ManageDB;Persist Security Info=True;User ID=admin;Password=jp;Encrypt=True;TrustServerCertificate=True");
+        private decimal silverRate;
         public BatheAndPolish()
         {
             InitializeComponent();
+            UpdateSilverRateTextBox();
         }
-
+        public void UpdateSilverRateTextBox()
+        {
+            LoadSilverRate();
+            SratetxtBox.Texts = silverRate.ToString();
+        }
         private void CloseBtn_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -28,35 +37,48 @@ namespace CheckProcessApplication
             }
 
         }
-
+        private void LoadSilverRate()
+        {
+            string query = @"SELECT ISNULL(SilverRate, 0) AS SilverRate FROM SilverRate
+                            WHERE (MONTH(cDate) = MONTH(GETDATE()) AND YEAR(cDate) = YEAR(GETDATE())) OR (MONTH(mDate) = MONTH(GETDATE()) AND YEAR(mDate) = YEAR(GETDATE()))
+                            ORDER BY cDate DESC, mDate DESC;";
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand(query, con);
+                var result = cmd.ExecuteScalar();
+                if (result != null && result != DBNull.Value)
+                {
+                    silverRate = Convert.ToDecimal(result);
+                }
+                else
+                {
+                    Center.cmd.CommandText = @"SELECT TOP 1 Silver_Spot
+                                            FROM A1Rate_Sale
+                                            ORDER BY Num DESC;";
+                    var dt = Center.Load();
+                    if (dt.Rows.Count > 0)
+                    {
+                        result = dt.Rows[0]["Silver_Spot"];
+                        if (result != null && result != DBNull.Value)
+                        {
+                            silverRate = Convert.ToDecimal(result);
+                        }
+                    }
+                }
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading SilverRate: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void previewBtn_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(invInput.Texts)) { return; }
-            //var value = 300;
             var WHERE = $"WHERE Inv_No = '{invInput.Texts.Trim()}'";
             var AND = $"AND Inv_No = '{invInput.Texts.Trim()}'";
-            //DateTimePicker
-            string WHEREDATE = "";
-            var DTP = dtpInput.Value.Date;
-            var currentDate = DateTime.Today;
-            if (DTP != currentDate)
-            {
-                WHEREDATE = $"WHERE JobHead.JobDate = '{DTP:yyyy-MM-dd}'";
-            }
-            //SilverRate
-            var SRATE = SrateInput.Texts.Trim();
-            if (string.IsNullOrEmpty(SRATE))
-            {
-                SRATE = "37";
-            }
-            else
-            {
-                if (!decimal.TryParse(SRATE, out _))
-                {
-                    MessageBox.Show("กรุณากรอก 'Rate เนื้อเงิน' เป็น 'ตัวเลข' เท่านั้น", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-            }
+            LoadSilverRate();
             Center.cmd.CommandText = $@"--select * from V_PolishAndBathe {WHERE} order by DocNo, JobBarcode
                                         WITH RankedData AS
                                         (SELECT AccEmp.EmpCode, JobHead.EmpName, AccEmp.Inv_No, AccEmp.DocNo, AccEmp2.JobBarCode, JobHead.JobDate,
@@ -65,11 +87,11 @@ namespace CheckProcessApplication
                                         CASE WHEN (SELECT MIN(JobKeep.mDate) FROM JobKeep WHERE JobKeep.DocNo = AccEmp.DocNo {AND}) > DATEADD(DAY, 10, JobHead.JobDate) THEN 'YES' ELSE '' END AS Late,
                                         CASE WHEN EXISTS (SELECT Accemp.Inv_No, Jobkeeps.TtQty, Jobdetail.TtQty, JobKeep.Num FROM JobKeep JobKeep LEFT JOIN (SELECT DocNo, EmpCode, JobBarcode, mdate, TtQty, Num FROM JobKeep) AS JobKeeps ON AccEmp.DocNo = JobKeeps.DocNo AND AccEmp.EmpCode = JobKeeps.EmpCode LEFT JOIN JobDetail ON AccEmp.DocNo = JobDetail.DocNo AND AccEmp.EmpCode = JobDetail.EmpCode WHERE JobKeeps.DocNo = AccEmp.DocNo AND JobKeeps.TtQty < 0.7 * JobDetail.TtQty  AND JobKeeps.Num = 1 {AND}) THEN 'YES' ELSE '' END AS Less,
                                         CASE WHEN (SELECT MIN(JobKeep.mDate) FROM JobKeep WHERE JobKeep.DocNo = AccEmp.DocNo {AND}) > DATEADD(DAY, 10, JobHead.JobDate) OR EXISTS (SELECT Accemp.Inv_No, Jobkeeps.TtQty, Jobdetail.TtQty, JobKeep.Num FROM JobKeep JobKeep LEFT JOIN (SELECT DocNo, EmpCode, JobBarcode, mdate, TtQty, Num FROM JobKeep) AS JobKeeps ON AccEmp.DocNo = JobKeeps.DocNo AND AccEmp.EmpCode = JobKeeps.EmpCode LEFT JOIN JobDetail ON AccEmp.DocNo = JobDetail.DocNo AND AccEmp.EmpCode = JobDetail.EmpCode WHERE JobKeeps.DocNo = AccEmp.DocNo AND JobKeeps.TtQty < 0.7 * JobDetail.TtQty  AND JobKeeps.Num = 1 {AND}) THEN CAST((JobDetail.PriceJob * FLOOR(AccEmp2.OKQty)) / 2 AS DECIMAL(18, 2)) ELSE 0.00 END AS LateFee,
-                                        CASE WHEN ISNULL(AccEmp2.Accprice, 0) > ISNULL(JobCost.Cost3, 0) THEN 'ไม่ถูกต้อง' ELSE '' END AS CenterAcc,
+                                        CASE WHEN ISNULL(AccEmp2.AccPrice, 0) > ISNULL(JobCost.Cost3, 0) THEN 'ไม่ถูกต้อง' ELSE '' END AS CenterAcc,
                                         CAST((ISNULL(AccEmp2.OKWG, 0) + ISNULL(V_JobMaterial_NoSum.MatRecWg, 0) + ISNULL(JobBills.RtWg, 0) + ISNULL(JobBills.Silver, 0) + FLOOR((ISNULL(AccEmp2.OKWG, 0) * ISNULL(JobDetail.DMPercent, 0)) / 100 * 100) / 100) - (ISNULL(JobDetail.Ttlwg, 0) + ISNULL(V_JobMaterial_NoSum.MatRecWg, 0) + ISNULL(JobGemDetail.JobWg, 0)) AS DECIMAL(18, 2)) AS DiffWgLoss,
                                         CASE WHEN CAST((ISNULL(AccEmp2.OKWG, 0) + ISNULL(V_JobMaterial_NoSum.MatRecWg, 0) + ISNULL(JobBills.RtWg, 0) + ISNULL(JobBills.Silver, 0) + FLOOR((ISNULL(AccEmp2.OKWG, 0) * ISNULL(JobDetail.DMPercent, 0)) / 100 * 100) / 100) - (ISNULL(JobDetail.Ttlwg, 0) + ISNULL(V_JobMaterial_NoSum.MatRecWg, 0) + ISNULL(JobGemDetail.JobWg, 0)) AS DECIMAL(18, 2)) < 0 THEN 1 ELSE 0 END AS UnitLoss,
                                         CASE WHEN ISNULL(AccEmp2.OKWG, 0) > ISNULL(AccEmp2.OKWG, 0) + ((ISNULL(AccEmp2.OKWG, 0) - (ISNULL(V_JobMaterial_Sum.MatWg, 0) + ISNULL(V_JobMaterial_Sum.MatWg2, 0))) / 100) THEN 'ไม่ถูกต้อง' ELSE '' END AS DeductLost,
-                                        CASE WHEN ISNULL(AccEmp.DMWG, 0) + ISNULL(AccEmp.LSWG, 0) + ISNULL(AccEmp.DMGemAmount, 0) + ISNULL(AccEmp.LSGemAmount, 0) > 500 THEN CAST(ISNULL(AccEmp.DMWG, 0) + ISNULL(AccEmp.LSWG, 0) + ISNULL(AccEmp.DMGemAmount, 0) + ISNULL(AccEmp.LSGemAmount, 0) AS DECIMAL (18, 2)) ELSE 0 END AS DiffWg,
+                                        CASE WHEN CAST(ISNULL(AccEmp2.OKWG, 0) + ISNULL(V_JobMaterial_NoSum.MatRecWg, 0) + ISNULL(JobBills.RtWg, 0) + ISNULL(JobBills.Silver, 0) + FLOOR((ISNULL(AccEmp2.OKWG, 0) - (ISNULL(JobDetail.MatWg, 0) + ISNULL(JobDetail.MatWg2, 0))) * ISNULL(JobDetail.DMPercent, 0) / 100) - ISNULL(JobDetail.TtlWg, 0) + ISNULL(JobDetail.MatWg, 0) + ISNULL(JobDetail.MatWg2, 0) AS DECIMAL(18, 2)) > CAST((ISNULL(AccEmp2.OKWG, 0) - ISNULL(V_JobMaterial_Sum.MatWg, 0) + ISNULL(V_JobMaterial_Sum.MatWg2, 0)) / 100.0 AS DECIMAL(18, 2)) THEN 'ไม่ถูกต้อง' ELSE '' END AS DiffWg,
                                         CASE WHEN ISNULL(AccEmp.EmpAmount, 0) + ISNULL(AccEmp.ISAAmount, 0) <> (ISNULL(JobDetail.PriceJob, 0) * FLOOR(ISNULL(SUM(AccEmp2.OKQty) OVER (PARTITION BY AccEmp2.DocNo, AccEmp2.EmpCode), 0))) - (ISNULL(AccEmp.DMWG, 0) + ISNULL(AccEmp.LSWG, 0) + ISNULL(AccEmp.DMGemAmount, 0) + ISNULL(AccEmp.LSGemAmount, 0) + ISNULL(AccEmp.DeductAmount, 0)) THEN 'ค่าแรงไม่ถูกต้อง' ELSE '' END AS Wage,
                                         CAST(ISNULL(JobDetail.Ttlwg, 0) - (ISNULL(JobDetail.MatWg, 0) + ISNULL(JobDetail.MatWg2, 0)) - (ISNULL(AccEmp.ISSWG, 0) - (ISNULL(V_JobMaterial_NoSum.MatWg, 0) + ISNULL(V_JobMaterial_NoSum.MatWg2, 0))) AS DECIMAL(18, 2)) AS DiffWg1,
                                         CAST(ISNULL(JobDetail.MatWg, 0) + ISNULL(JobDetail.MatWg2, 0) - (ISNULL(V_JobMaterial_NoSum.MatWg, 0) + ISNULL(V_JobMaterial_NoSum.MatWg2, 0)) AS DECIMAL(18, 2)) AS DiffMat1,
@@ -77,7 +99,7 @@ namespace CheckProcessApplication
                                         CAST(ISNULL(V_JobMaterial_NoSum.MatRecWg, 0) - ISNULL(V_JobMaterial_NoSum.MatRecWg, 0) AS DECIMAL(18, 2)) AS DiffMat2,
                                         CAST((SUM(ISNULL(AccEmp2.OKWG, 0) + ISNULL(V_JobMaterial_NoSum.MatRecWg, 0) + ISNULL(JobBills.RtWg, 0) + ISNULL(JobBills.Silver, 0) + (FLOOR((((ISNULL(AccEmp2.OKWG, 0)) * ISNULL(JobDetail.DMPercent, 0)) / 100) * 100) / 100)) OVER () - SUM(ISNULL(JobDetail.TtlWg, 0) + ISNULL(V_JobMaterial_NoSum.MatRecWg, 0) + ISNULL(JobGemDetail.JobWg, 0)) OVER ()) AS DECIMAL(18, 2)) AS DiffTTWg,
                                         CAST(((CAST(SUM(ISNULL(AccEmp2.OKWG, 0) + ISNULL(V_JobMaterial_NoSum.MatRecWg, 0) + ISNULL(JobBills.RtWg, 0) + ISNULL(JobBills.Silver, 0) + FLOOR((ISNULL(AccEmp2.OKWG, 0) * ISNULL(JobDetail.DMPercent, 0)) / 100 * 100) / 100) OVER () AS DECIMAL(18, 2)) - SUM(ISNULL(JobDetail.TtlWg, 0) + ISNULL(V_JobMaterial_NoSum.MatRecWg, 0) + ISNULL(JobGemDetail.JobWg, 0)) OVER ()) / NULLIF(SUM(ISNULL(JobDetail.TtlWg, 0) + ISNULL(V_JobMaterial_NoSum.MatRecWg, 0) + ISNULL(JobGemDetail.JobWg, 0)) OVER (), 0)) * 100 AS DECIMAL(5, 2)) AS PerDiffTTWg,
-                                        CAST(SUM((JobDetail.PriceJob * FLOOR(AccEmp2.OKQty)) - (AccEmp.DMWG + AccEmp.LSWG + AccEmp.DMGemAmount + AccEmp.LSGemAmount) + CASE WHEN CAST((ISNULL(AccEmp2.OKWG, 0) + ISNULL(V_JobMaterial_NoSum.MatRecWg, 0) + ISNULL(JobBills.RtWg, 0) + ISNULL(JobBills.Silver, 0) + FLOOR((ISNULL(AccEmp2.OKWG, 0) * ISNULL(JobDetail.DMPercent, 0)) / 100 * 100) / 100) - (ISNULL(JobDetail.Ttlwg, 0) + ISNULL(V_JobMaterial_NoSum.MatRecWg, 0) + ISNULL(JobGemDetail.JobWg, 0)) AS DECIMAL(18, 2)) < 0 THEN (CAST((ISNULL(V_JobMaterial_NoSum.MatRecWg, 0) - ISNULL(JobDetail.MatWg, 0)) AS DECIMAL(18, 2)) * {SRATE}) ELSE 0 END ) OVER() AS DECIMAL(18, 2)) AS NetWage
+                                        CAST(SUM((JobDetail.PriceJob * FLOOR(AccEmp2.OKQty)) - (AccEmp.DMWG + AccEmp.LSWG + AccEmp.DMGemAmount + AccEmp.LSGemAmount) + CASE WHEN CAST((ISNULL(AccEmp2.OKWG, 0) + ISNULL(V_JobMaterial_NoSum.MatRecWg, 0) + ISNULL(JobBills.RtWg, 0) + ISNULL(JobBills.Silver, 0) + FLOOR((ISNULL(AccEmp2.OKWG, 0) * ISNULL(JobDetail.DMPercent, 0)) / 100 * 100) / 100) - (ISNULL(JobDetail.Ttlwg, 0) + ISNULL(V_JobMaterial_NoSum.MatRecWg, 0) + ISNULL(JobGemDetail.JobWg, 0)) AS DECIMAL(18, 2)) < 0 THEN (CAST((ISNULL(V_JobMaterial_NoSum.MatRecWg, 0) - ISNULL(JobDetail.MatWg, 0)) AS DECIMAL(18, 2)) * {silverRate}) ELSE 0 END ) OVER() AS DECIMAL(18, 2)) AS NetWage
                                         FROM (SELECT * FROM AccEmp {WHERE}) AS AccEmp
                                         LEFT JOIN AccEmp2 ON AccEmp.DocNo = AccEmp2.DocNo AND AccEmp.EmpCode = AccEmp2.EmpCode
                                         LEFT JOIN JobDetail ON AccEmp.DocNo = JobDetail.DocNo AND AccEmp.EmpCode = JobDetail.EmpCode AND AccEmp2.JobBarCode = JobDetail.JobBarcode
@@ -90,23 +112,19 @@ namespace CheckProcessApplication
                                         LEFT JOIN (SELECT DocNo, EmpCode, Silver, SUM(OKTtl) AS OKTtl, SUM(RtWg) AS RtWg FROM JobBill GROUP BY DocNo, EmpCode, Silver) AS JobBills ON AccEmp.DocNo = JobBills.DocNo AND AccEmp.EmpCode = JobBills.EmpCode
                                         LEFT JOIN PSKTran2 ON JobDetail.OrderNo = PSKTran2.Orderno AND JobDetail.LotNo = PSKTran2.LotNo AND JobDetail.Barcode = PSKTran2.Barcode
                                         LEFT JOIN (SELECT DocNo, SUM(JobWg) as JobWg FROM JobGemDetail GROUP BY DocNo) AS JobGemDetail on JobGemDetail.DocNo = AccEmp.DocNo
-                                        {WHEREDATE}
 	                                    GROUP BY AccEmp.EmpCode, JobHead.EmpName, AccEmp.Inv_No, AccEmp.DocNo, AccEmp2.JobBarCode, JobHead.JobDate, LEFT(JobDetail.Article, 1), CProfile.TdesArt, JobHead.ChkReturn, JobHead.ChkAccount, JobDetail.PriceJob, AccEmp2.OKQty, AccEmp2.Accprice, JobCost.Cost3, AccEmp2.OKWG, V_JobMaterial_Sum.MatWg, V_JobMaterial_Sum.MatWg2, V_JobMaterial_NoSum.MatWg, V_JobMaterial_NoSum.MatWg2, V_JobMaterial_NoSum.MatRecWg, AccEmp.DMWG, AccEmp.LSWG, AccEmp.DMGemAmount, AccEmp.LSGemAmount, AccEmp.DeductAmount, AccEmp.EmpAmount, AccEmp.ISAAmount, AccEmp.ISSWG, JobDetail.Ttlwg, JobDetail.Matwg, JobDetail.Matwg2, JobBills.RtWg, JobBills.Silver, JobDetail.DMPercent, AccEmp2.DocNo, AccEmp2.EmpCode, JobDetail.TtQty, JobGemDetail.JobWg
-                                        ) 
+                                        )
                                         SELECT DENSE_RANK() OVER (ORDER BY DocNo) AS [ลำดับที่], EmpCode, EmpName, Inv_No, DocNo, JobBarCode, JobDate, TypeOfWork, TypeOfBill, Late, Less, LateFee, CenterAcc, DiffWgLoss, UnitLoss, DeductLost, DiffWg, Wage, DiffWg1, DiffMat1, DiffWg2, DiffMat2, DiffTTWg, PerDiffTTWg, NetWage FROM RankedData;";
-
             var dt = Center.Load();
             if (dt.Rows.Count == 0)
             {
-                MessageBox.Show($"ไม่พบข้อมูล Inv. {invInput.Texts} ,วันที่จ่าย {dtpInput.Value.Date.ToString("D")}", "ERROR!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"ไม่พบข้อมูล Inv. {invInput.Texts}", "ERROR!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
             cReport = new ReportDocument();
             DataSet ds = new DataSet();
             if (!ds.Tables.Contains(dt.TableName))
                 ds.Tables.Add(dt.Copy());
-
             //cReport.Load($"D:\\Best_Project\\JPM-Check-Job\\CheckProcessApplication\\Reports\\PolishAndBatheReport.rpt");
             cReport.Load($"{Application.StartupPath}/Reports/BatheAndPolishReport.rpt");
             ds.WriteXmlSchema(xsdFile);
@@ -114,10 +132,21 @@ namespace CheckProcessApplication
             var u = new uReportViewer(cReport);
             u.WindowState = FormWindowState.Maximized;
             u.Show();
-
             System.IO.File.Delete(xsdFile);
-
         }
-
+        private void silverbtn_Click(object sender, EventArgs e)
+        {
+            openSilverRateBnP();
+        }
+        private void openSilverRateBnP()
+        {
+            SilverRateBnP silverRatePopup = new SilverRateBnP();
+            silverRatePopup.StartPosition = FormStartPosition.CenterScreen;
+            if (silverRatePopup.ShowDialog() == DialogResult.OK)
+            {
+                LoadSilverRate();
+                SratetxtBox.Texts = silverRate.ToString();
+            }
+        }
     }
 }
