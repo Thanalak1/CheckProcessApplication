@@ -431,6 +431,7 @@
             this.FoundryAndDressBtn.BorderRadius = 0;
             this.FoundryAndDressBtn.BorderSize = 0;
             this.FoundryAndDressBtn.Dock = System.Windows.Forms.DockStyle.Top;
+            this.FoundryAndDressBtn.Enabled = false;
             this.FoundryAndDressBtn.FlatAppearance.BorderSize = 0;
             this.FoundryAndDressBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.FoundryAndDressBtn.Font = new System.Drawing.Font("Angsana New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));

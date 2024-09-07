@@ -52,7 +52,7 @@ namespace CheckProcessApplication
             if (!ds.Tables.Contains(dt.TableName))
                 ds.Tables.Add(dt.Copy());
 
-            cReport.Load($"{Application.StartupPath}/Reports/BatheReport.rpt");
+            cReport.Load($"{Application.StartupPath}/Reports/BatheReport2.rpt");
             ds.WriteXmlSchema(xsdFile);
             cReport.SetDataSource(dt);
             var u = new uReportViewer(cReport);
