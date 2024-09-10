@@ -49,8 +49,8 @@ namespace CheckProcessApplication
             DataSet ds = new DataSet();
             if (!ds.Tables.Contains(dt.TableName))
                 ds.Tables.Add(dt.Copy());
-
-            cReport.Load($"\\\\factoryserver\\BillingScrip\\Reports\\BuryReport.rpt");
+            //$"\\\\factoryserver\\BillingScrip\\Reports\\BuryReport.rpt"
+            cReport.Load($"\\\\factoryserver\\BillingScrip\\Reports\\BuryReport2.rpt");
             ds.WriteXmlSchema(xsdFile);
             cReport.SetDataSource(dt);
             var u = new uReportViewer(cReport);
