@@ -54,8 +54,8 @@ namespace CheckProcessApplication
             DataSet ds = new DataSet();
             if (!ds.Tables.Contains(dt.TableName))
                 ds.Tables.Add(dt.Copy());
-
-            cReport.Load($"D:\\Best_Project\\JPM-Check-Job\\CheckProcessApplication\\Reports\\CompleteReport.rpt");
+            //$"\\\\factoryserver\\BillingScrip\\Reports\\CompleteReport.rpt"
+            cReport.Load($"\\\\factoryserver\\BillingScrip\\Reports\\CompleteReport2.rpt");
             ds.WriteXmlSchema(xsdFile);
             cReport.SetDataSource(dt);
             var u = new uReportViewer(cReport);

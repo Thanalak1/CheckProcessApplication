@@ -50,8 +50,8 @@ namespace CheckProcessApplication
             DataSet ds = new DataSet();
             if (!ds.Tables.Contains(dt.TableName))
                 ds.Tables.Add(dt.Copy());
-
-            cReport.Load($"{Application.StartupPath}/Reports/DressReport.rpt");
+            //$"\\\\factoryserver\\BillingScrip\\Reports\\DressReport.rpt"
+            cReport.Load($"\\\\factoryserver\\BillingScrip\\Reports\\DressReport.rpt");
             ds.WriteXmlSchema(xsdFile);
             cReport.SetDataSource(dt);
             var u = new uReportViewer(cReport);

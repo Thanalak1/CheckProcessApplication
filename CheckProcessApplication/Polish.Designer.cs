@@ -114,7 +114,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.labelReportTitle);
             this.Name = "Polish";
-            this.Text = "Polish";
+            this.Text = "ตรวจงานขัด";
             this.ResumeLayout(false);
             this.PerformLayout();
 

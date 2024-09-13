@@ -30,13 +30,12 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.dtpInput = new System.Windows.Forms.DateTimePicker();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.SrateInput = new CheckProcessApplication.CustomTools.TextBoxCustom();
             this.CloseBtn = new CheckProcessApplication.CustomTools.BtnCustom();
             this.previewBtn = new CheckProcessApplication.CustomTools.BtnCustom();
             this.invInput = new CheckProcessApplication.CustomTools.TextBoxCustom();
+            this.silverbtn = new System.Windows.Forms.Button();
+            this.SratetxtBox = new CheckProcessApplication.CustomTools.TextBoxCustom();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -58,51 +57,6 @@
             this.label2.Size = new System.Drawing.Size(49, 26);
             this.label2.TabIndex = 1;
             this.label2.Text = "Inv No.";
-            // 
-            // dtpInput
-            // 
-            this.dtpInput.Location = new System.Drawing.Point(114, 283);
-            this.dtpInput.Name = "dtpInput";
-            this.dtpInput.Size = new System.Drawing.Size(200, 20);
-            this.dtpInput.TabIndex = 5;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Angsana New", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.label3.Location = new System.Drawing.Point(32, 283);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 26);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "วันที่";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Angsana New", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.label4.Location = new System.Drawing.Point(32, 339);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(77, 26);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Rate เนื้อเงิน";
-            // 
-            // SrateInput
-            // 
-            this.SrateInput.BackColor = System.Drawing.SystemColors.Window;
-            this.SrateInput.BorderColor = System.Drawing.Color.LightPink;
-            this.SrateInput.BorderFocusColor = System.Drawing.Color.HotPink;
-            this.SrateInput.BorderRadius = 0;
-            this.SrateInput.BorderSize = 2;
-            this.SrateInput.Location = new System.Drawing.Point(114, 336);
-            this.SrateInput.Multiline = true;
-            this.SrateInput.Name = "SrateInput";
-            this.SrateInput.PasswordChar = false;
-            this.SrateInput.PlaceholderColor = System.Drawing.Color.DarkGray;
-            this.SrateInput.PlaceholderText = "";
-            this.SrateInput.Size = new System.Drawing.Size(250, 30);
-            this.SrateInput.TabIndex = 7;
-            this.SrateInput.Texts = "";
-            this.SrateInput.UnderLineStyle = false;
             // 
             // CloseBtn
             // 
@@ -156,16 +110,57 @@
             this.invInput.Texts = "";
             this.invInput.UnderLineStyle = false;
             // 
+            // silverbtn
+            // 
+            this.silverbtn.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.silverbtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.silverbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.silverbtn.Location = new System.Drawing.Point(536, 272);
+            this.silverbtn.Name = "silverbtn";
+            this.silverbtn.Size = new System.Drawing.Size(116, 40);
+            this.silverbtn.TabIndex = 9;
+            this.silverbtn.Text = "Silver Rate";
+            this.silverbtn.UseVisualStyleBackColor = false;
+            this.silverbtn.Click += new System.EventHandler(this.silverbtn_Click);
+            // 
+            // SratetxtBox
+            // 
+            this.SratetxtBox.BackColor = System.Drawing.SystemColors.Window;
+            this.SratetxtBox.BorderColor = System.Drawing.Color.LightPink;
+            this.SratetxtBox.BorderFocusColor = System.Drawing.Color.HotPink;
+            this.SratetxtBox.BorderRadius = 0;
+            this.SratetxtBox.BorderSize = 2;
+            this.SratetxtBox.Enabled = false;
+            this.SratetxtBox.Location = new System.Drawing.Point(30, 280);
+            this.SratetxtBox.Multiline = true;
+            this.SratetxtBox.Name = "SratetxtBox";
+            this.SratetxtBox.PasswordChar = false;
+            this.SratetxtBox.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.SratetxtBox.PlaceholderText = "";
+            this.SratetxtBox.Size = new System.Drawing.Size(284, 30);
+            this.SratetxtBox.TabIndex = 10;
+            this.SratetxtBox.Texts = "";
+            this.SratetxtBox.UnderLineStyle = false;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Angsana New", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.label3.Location = new System.Drawing.Point(27, 252);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(116, 26);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Rate เนื้อเงินปัจจุบัน";
+            // 
             // BatheAndPolish
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(695, 476);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.SrateInput);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.dtpInput);
+            this.Controls.Add(this.SratetxtBox);
+            this.Controls.Add(this.silverbtn);
             this.Controls.Add(this.CloseBtn);
             this.Controls.Add(this.previewBtn);
             this.Controls.Add(this.invInput);
@@ -185,9 +180,8 @@
         private CustomTools.TextBoxCustom invInput;
         private CustomTools.BtnCustom previewBtn;
         private CustomTools.BtnCustom CloseBtn;
-        private System.Windows.Forms.DateTimePicker dtpInput;
+        private System.Windows.Forms.Button silverbtn;
+        private CustomTools.TextBoxCustom SratetxtBox;
         private System.Windows.Forms.Label label3;
-        private CustomTools.TextBoxCustom SrateInput;
-        private System.Windows.Forms.Label label4;
     }
 }
