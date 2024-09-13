@@ -35,8 +35,8 @@ namespace CheckProcessApplication
             var value = 300;
             var WHERE = $"WHERE Inv_No = '{InvInput.Texts}'";
             if (!string.IsNullOrEmpty(textBoxCustom1.Texts)) { value = Convert.ToInt32(textBoxCustom1.Texts); }
-            Center.cmd.CommandText = $"SELECT EmpCode, EmpName, Inv_No, DocNo, JobBarCode, JobDate, TypeOfWork, TypeOfBill, Late, TtQy, CASE WHEN Late = 'YES' OR TtQy = 'YES' THEN (PriceJob * FLOOR(OKQty)) / 2 ELSE 0 END AS DeductLate, JobCenter, Wage, DIFFQty, DIFFOrder, DIFFModel, DIFFSI, DIFFWG1, DIFFWG2, DIFFWG3, DIFFMatWG, DIFFTotalWG, DIFFTotalWGPercent, TotalWage, TEST" +
-                $" FROM (SELECT AccEmp.EmpCode, JobHead.EmpName, AccEmp.Inv_No, AccEmp.DocNo, AccEmp2.JobBarCode, JobHead.JobDate" +
+            Center.cmd.CommandText = $"SELECT EmpCode, EmpName, Inv_No, DocNo, JobBarCode, JobDate, TypeOfWork, TypeOfBill, Late, TtQy, CASE WHEN Late = 'YES' OR TtQy = 'YES' THEN (PriceJob * FLOOR(OKQty)) / 2 ELSE 0 END AS DeductLate, JobCenter, Wage, DIFFQty, DIFFOrder, DIFFModel, DIFFSI, DIFFWG1, DIFFWG2, DIFFWG3, DIFFMatWG, DIFFTotalWG, DIFFTotalWGPercent, TotalWage, DeductAmount" +
+                $" FROM (SELECT AccEmp.EmpCode, JobHead.EmpName, AccEmp.Inv_No, AccEmp.DocNo, AccEmp2.JobBarCode, JobHead.JobDate, AccEmp.DeductAmount" +
                 $", CASE WHEN LEFT(JobDetail.Article,1) = 'B' OR CProfile.TDesArt LIKE '%ทองเหลือง%' THEN 'ทองเหลือง' ELSE '' END AS TypeOfWork" +
                 $", CASE WHEN JobHead.ChkReturn = 0 AND JobHead.ChkAccount = 1 THEN 'ซ่อม' ELSE '' END AS TypeOfBill" +
                 $", CASE WHEN DATEDIFF(DAY, DATEADD(DAY, CASE WHEN JobDetail.DMPercent != 0 THEN 9 ELSE 0 END, DATEADD(DAY, (CASE WHEN JobDetail.ChkModel = 1 AND JobDetail.Model > 0 THEN 12 ELSE 9 END), JobHead.JobDate)), JobKeeps.mdate) > 1 THEN 'YES' ELSE '' END AS Late" +
@@ -90,8 +90,11 @@ namespace CheckProcessApplication
             DataSet ds = new DataSet();
             if (!ds.Tables.Contains(dt.TableName))
                 ds.Tables.Add(dt.Copy());
-
+#if DEBUG
+            cReport.Load($"{Application.StartupPath}/Reports/CrystalReport2.rpt");
+#else
             cReport.Load($"\\\\factoryserver\\BillingScrip\\Reports\\CrystalReport2.rpt");
+#endif
             ds.WriteXmlSchema(xsdFile);
             cReport.SetDataSource(dt);
             var u = new uReportViewer(cReport);
