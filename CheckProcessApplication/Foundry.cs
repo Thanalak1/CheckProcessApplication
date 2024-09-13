@@ -35,8 +35,8 @@ namespace CheckProcessApplication
             var value = 300;
             var WHERE = $"WHERE Inv_No = '{InvInput.Texts}'";
             if (!string.IsNullOrEmpty(textBoxCustom1.Texts)) { value = Convert.ToInt32(textBoxCustom1.Texts); }
-            Center.cmd.CommandText = $"SELECT EmpCode, EmpName, Inv_No, DocNo, JobBarCode, JobDate, TypeOfWork, TypeOfBill, Late, TtQy, CASE WHEN Late = 'YES' OR TtQy = 'YES' THEN (PriceJob * FLOOR(OKQty)) / 2 ELSE 0 END AS DeductLate, JobCenter, Wage, DIFFQty, DIFFOrder, DIFFModel, DIFFSI, DIFFWG1, DIFFWG2, DIFFWG3, DIFFMatWG, DIFFTotalWG, DIFFTotalWGPercent, TotalWage, TEST" +
-                $" FROM (SELECT AccEmp.EmpCode, JobHead.EmpName, AccEmp.Inv_No, AccEmp.DocNo, AccEmp2.JobBarCode, JobHead.JobDate" +
+            Center.cmd.CommandText = $"SELECT EmpCode, EmpName, Inv_No, DocNo, JobBarCode, JobDate, TypeOfWork, TypeOfBill, Late, TtQy, CASE WHEN Late = 'YES' OR TtQy = 'YES' THEN (PriceJob * FLOOR(OKQty)) / 2 ELSE 0 END AS DeductLate, JobCenter, Wage, DIFFQty, DIFFOrder, DIFFModel, DIFFSI, DIFFWG1, DIFFWG2, DIFFWG3, DIFFMatWG, DIFFTotalWG, DIFFTotalWGPercent, TotalWage, DeductAmount" +
+                $" FROM (SELECT AccEmp.EmpCode, JobHead.EmpName, AccEmp.Inv_No, AccEmp.DocNo, AccEmp2.JobBarCode, JobHead.JobDate, AccEmp.DeductAmount" +
                 $", CASE WHEN LEFT(JobDetail.Article,1) = 'B' OR CProfile.TDesArt LIKE '%ทองเหลือง%' THEN 'ทองเหลือง' ELSE '' END AS TypeOfWork" +
                 $", CASE WHEN JobHead.ChkReturn = 0 AND JobHead.ChkAccount = 1 THEN 'ซ่อม' ELSE '' END AS TypeOfBill" +
                 $", CASE WHEN DATEDIFF(DAY, DATEADD(DAY, CASE WHEN JobDetail.DMPercent != 0 THEN 9 ELSE 0 END, DATEADD(DAY, (CASE WHEN JobDetail.ChkModel = 1 AND JobDetail.Model > 0 THEN 12 ELSE 9 END), JobHead.JobDate)), JobKeeps.mdate) > 1 THEN 'YES' ELSE '' END AS Late" +
@@ -44,7 +44,7 @@ namespace CheckProcessApplication
                 $", ISNULL(JobDetail.PriceJob, 0) AS PriceJob, ISNULL(AccEmp2.OKQty, 0) AS OKQty" +
                 $", CASE WHEN ISNULL(AccEmp2.AccPrice, 0) > ISNULL(JobCost.Cost1, 0) THEN 'ไม่ถูกต้อง' ELSE '' END AS JobCenter" +
                 //$", CASE WHEN ISNULL(AccEmp.EmpAmount, 0) + ISNULL(AccEmp.ISAAmount, 0) <> (ISNULL(JobDetail.PriceJob, 0) * FLOOR(ISNULL(AccEmp2.OKQty, 0)) - (ISNULL(AccEmp.DMWG, 0) + ISNULL(AccEmp.LSWG, 0) + ISNULL(AccEmp.DMGemAmount, 0))) + (ISNULL(Emps.qtys, 0) * ModelNewP) + (FLOOR(ISNULL(AccEmp.OKQty, 0) - ISNULL(AccEmp2.OKQty,0))) * ISNULL(JobDetail.PriceJob, 0) THEN 'ค่าแรงไม่ถูกต้อง' ELSE '' END AS Wage" +
-                $", CASE WHEN ISNULL(AccEmp.EmpAmount, 0) + ISNULL(AccEmp.ISAAmount, 0) <> Wages - (ISNULL(AccEmp.DMWG, 0) + ISNULL(AccEmp.LSWG, 0) + ISNULL(AccEmp.DMGemAmount, 0)) + (ISNULL(Emps.qtys, 0) * ModelNewP) - CASE WHEN AccEmp.DeductAmount = AccEmp.ISAAmount THEN ISNULL(AccEmp.ISAAmount, 0) ELSE 0 END THEN 'ค่าแรงไม่ถูกต้อง' ELSE '' END AS Wage" +
+                $", CASE WHEN ISNULL(AccEmp.EmpAmount, 0) + ISNULL(AccEmp.ISAAmount, 0) <> Wages - (ISNULL(AccEmp.DMWG, 0) + ISNULL(AccEmp.LSGemAmount, 0) + CASE WHEN AccEmp.ISAAmount <> AccEmp.DeductAmount THEN AccEmp.ISAAmount + AccEmp.DeductAmount ELSE AccEmp.DeductAmount END + ISNULL(AccEmp.LSWG, 0) + ISNULL(AccEmp.DMGemAmount, 0)) + (ISNULL(Emps.qtys, 0) * ModelNewP) - ISNULL(AccEmp.ISAAmount, 0) THEN 'ค่าแรงไม่ถูกต้อง' ELSE '' END AS Wage" +
                 $", CEILING(CASE WHEN ISNULL(Jobmodel_purchase.qty, 0) <> 0 THEN ISNULL(Jobmodel_purchase.qty, 0) - (ISNULL(AccEmp.OKQTY, 0) / {value}) ELSE 0 END) AS DIFFQty, 0 AS DIFF2" +
                 $", CASE WHEN ISNULL(Jobmodel_purchase.qty, 0) = 0 THEN 0 ELSE CASE WHEN ISNULL(AccEmp.ModelNewQ, 0) + ISNULL(AccEmp.ModelNewQ2, 0) + ISNULL(AccEmp.ModelNewQ3, 0) >= ISNULL(Jobmodel_purchase.qty, 0) THEN CASE WHEN ISNULL(Jobmodel_purchase.qty, 0) <= CEILING(ISNULL(AccEmp.OKQTY, 0) / {value}) THEN ISNULL(Jobmodel_purchase.qty, 0) ELSE CEILING(ISNULL(AccEmp.OKQTY, 0) / {value}) END ELSE CASE WHEN ISNULL(Jobmodel_purchase.qty, 0) <= CEILING(ISNULL(AccEmp.OKQTY, 0) / {value}) THEN ISNULL(AccEmp.ModelNewQ, 0) + ISNULL(AccEmp.ModelNewQ2, 0) + ISNULL(AccEmp.ModelNewQ3, 0) ELSE CEILING(ISNULL(AccEmp.OKQTY, 0) / {value}) END END END AS DIFFOrder" +
                 $", CASE WHEN (JobDetail.ChkModel = 1) OR (JobDetail.ChkChunk = 1) THEN (ISNULL(V_JobModel_Sum.QtyR_REC, 0) + ISNULL(V_JobModel_Sum.QtyM_REC, 0)) - (ISNULL(V_JobModel_Sum.QtyR_ISS, 0) + ISNULL(V_JobModel_Sum.QtyM_ISS, 0)) ELSE 0 END AS DIFFModel" +
@@ -61,7 +61,7 @@ namespace CheckProcessApplication
                 $", CASE WHEN JobDeducts.Amounts IS NULL THEN 0 ELSE (JobDeductFormula.Deduct * JobDeductFormula.Price) - JobDeducts.Amounts END AS TEST" +
                 $" FROM (SELECT * FROM AccEmp {WHERE}) AS AccEmp" +
                 $" LEFT JOIN AccEmp2 ON AccEmp.DocNo = AccEmp2.DocNo AND AccEmp.EmpCode = AccEmp2.EmpCode" +
-                $" LEFT JOIN (SELECT DocNo, EmpCode, SUM(OKQty * AccPrice) AS Wages FROM AccEmp2 GROUP BY DocNo, EmpCode) AS AccEmps ON AccEmp.DocNo = AccEmps.DocNo AND AccEmp.EmpCode = AccEmps.EmpCode" +
+                $" LEFT JOIN (SELECT DocNo, EmpCode, SUM(CASE WHEN OKQty = 0.5 THEN OKQty ELSE FLOOR(OKQTy) * AccPrice END) AS Wages FROM AccEmp2 GROUP BY DocNo, EmpCode) AS AccEmps ON AccEmp.DocNo = AccEmps.DocNo AND AccEmp.EmpCode = AccEmps.EmpCode" +
                 $" LEFT JOIN JobHead ON AccEmp.DocNo = JobHead.DocNo AND AccEmp.EmpCode = JobHead.EmpCode" +
                 $" LEFT JOIN JobDetail ON AccEmp.DocNo = JobDetail.DocNo AND AccEmp.EmpCode = JobDetail.EmpCode AND AccEmp2.JobBarCode = JobDetail.JobBarcode" +
                 $" LEFT JOIN CProfile ON JobDetail.Article = CProfile.Article AND JobDetail.ArtCode = CProfile.ArtCode" +
@@ -90,8 +90,11 @@ namespace CheckProcessApplication
             DataSet ds = new DataSet();
             if (!ds.Tables.Contains(dt.TableName))
                 ds.Tables.Add(dt.Copy());
-
+#if DEBUG
+            cReport.Load($"{Application.StartupPath}/Reports/CrystalReport2.rpt");
+#else
             cReport.Load($"\\\\factoryserver\\BillingScrip\\Reports\\CrystalReport2.rpt");
+#endif
             ds.WriteXmlSchema(xsdFile);
             cReport.SetDataSource(dt);
             var u = new uReportViewer(cReport);
